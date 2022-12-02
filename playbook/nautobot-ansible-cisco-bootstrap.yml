@@ -104,8 +104,9 @@
         serial: "{{ ansible_facts['net_serialnum'] }}"
         site: "{{ site }}"
         device_role: "{{ device_role }}"
-#        custom_fields:
-#          code_version: "{{ net_version }}"
+        status: "inventory"
+        custom_fields:
+          code_version: "{{ net_version }}"
       state: present
       validate_certs: no
     delegate_to: localhost
