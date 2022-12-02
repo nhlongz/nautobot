@@ -19,14 +19,14 @@
   - name: "Check if net_version exists"
     ### If ansible_facts does not provide net_version we manually fill it in as 111
     set_fact:
-      net_version: "Unknown"
+      net_version: "unknown"
       cacheable: yes
     when: ansible_facts['net_version'] is undefined
 
   - name: "Check if net_model exists"
     ### If ansible_facts does not provide net_model we manually fill it in as 111
     ansible.builtin.set_fact:
-      net_model: "Unknown"
+      net_model: "unknown"
       cacheable: yes
     when: ansible_facts['net_model'] is undefined
     
