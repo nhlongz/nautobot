@@ -15,20 +15,21 @@
     site: 'site-01'
     device_role: "access_switch"
   tasks:
+#------- ansible colected infomation hosts. ------#
   - name: "Check if net_version exists"
     ### If ansible_facts does not provide net_version we manually fill it in as 111
     set_fact:
-      net_version: "111"
+      net_version: "NULL"
+      cacheable: yes
     when: ansible_facts['net_version'] is undefined
 
   - name: "Check if net_model exists"
     ### If ansible_facts does not provide net_model we manually fill it in as 111
     ansible.builtin.set_fact:
-      net_model: "111"
+      net_model: "NULL"
       cacheable: yes
     when: ansible_facts['net_model'] is undefined
     
-
   - name: "Assign net version"
     set_fact:
       net_version: "{{ ansible_facts['net_version'] }}"
@@ -55,16 +56,20 @@
       fqdn: "{{ inventory_hostname }}-no-dns-{{ ansible_host }}"
     when: dig_result.stdout_lines[0] is undefined
 
+#-------- ansible create and update infomation from ansible_colected to nautobot------#
+# create 
+
+
   - name: "Add Device to nautobot"
     networktocode.nautobot.device:
     #netbox.netbox.netbox_device:
       url: "{{ url }}"
       token: "{{ token }}"
       data:
-        name: "{{ fqdn }}"
+        Name: "{{ fqdn }}"
         device_type: "{{ ansible_facts['net_model'] }}"
         platform: "{{ platform }}"
-        serial: "{{ ansible_facts['net_serialnum'] }}"
+        serial_number: "{{ ansible_facts['net_serialnum'] }}"
         site: "{{ site }}"
         device_role: "{{ device_role }}"
         custom_fields:
