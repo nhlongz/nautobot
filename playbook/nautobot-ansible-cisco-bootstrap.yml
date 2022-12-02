@@ -73,7 +73,6 @@
       url: "{{ url }}"
       token: "{{ token }}"
       name: "{{ fqdn }}"
-#      manufacturer: "cisco"
       platform: "{{ platform }}"
       device_type: "{{ ansible_facts['net_model'] }}"
       device_role: "{{ device_role }}"
