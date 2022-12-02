@@ -64,7 +64,7 @@
       token: "{{ token }}"
       name: "cisco"
       state: present
-    when: manufacturer['hosts'] is undefined
+    when: manufacturer['cisco'] is undefined
 
   - name: Create device type within Nautobot with only required information
     networktocode.nautobot.device_type:
