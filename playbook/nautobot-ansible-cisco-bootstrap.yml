@@ -58,6 +58,15 @@
 
 #-------- ansible create and update infomation from ansible_colected to nautobot------#
 # create 
+  - name: Create device_type within Nautobot with only required information
+    ignore_errors: yes
+    networktocode.nautobot.device_type:
+      url: "{{ url }}"
+      token: "{{ token }}"
+      slug: "{{ ansible_facts['net_model'] }}"
+      model: "{{ ansible_facts['net_model'] }}"
+      manufacturer: "cisco"
+      state: present
 
   - name: Create device within Nautobot with only required information
     networktocode.nautobot.device:
