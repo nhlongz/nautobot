@@ -21,6 +21,12 @@
       net_version: "111"
     when: ansible_facts['net_version'] is undefined
 
+  - name: "Check if net_model exists"
+    ### If ansible_facts does not provide net_model we manually fill it in as 111
+    set_fact:
+      net_model: "111"
+    when: ansible_facts['net_model'] is undefined
+
   - name: "Assign net version"
     set_fact:
       net_version: "{{ ansible_facts['net_version'] }}"
@@ -47,7 +53,7 @@
       fqdn: "{{ inventory_hostname }}-no-dns-{{ ansible_host }}"
     when: dig_result.stdout_lines[0] is undefined
 
-  - name: "Add Device to NetBox"
+  - name: "Add Device to nautobot"
     networktocode.nautobot.device:
     #netbox.netbox.netbox_device:
       url: "{{ url }}"
