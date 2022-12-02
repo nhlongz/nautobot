@@ -84,6 +84,14 @@
       status: active
       state: present
 
+  - name: Create device role within Nautobot with only required information
+    networktocode.nautobot.device_role:
+      url: "{{ url }}"
+      token: "{{ token }}"
+      name: "{{ device_role }}"
+      state: present
+
+### add device
   - name: "Add Device to nautobot"
     networktocode.nautobot.device:
       url: "{{ url }}"
