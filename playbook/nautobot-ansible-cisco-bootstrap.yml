@@ -60,7 +60,7 @@
       token: "{{ token }}"
       data:
         name: "{{ fqdn }}"
-        device_type: "{{ ansible_facts['net_model'] }}"
+        device_type: 'memay' #"{{ ansible_facts['net_model'] }}"
         platform: "{{ platform }}"
         serial: "{{ ansible_facts['net_serialnum'] }}"
         site: "{{ site }}"
