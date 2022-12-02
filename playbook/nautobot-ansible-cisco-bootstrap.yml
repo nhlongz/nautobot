@@ -60,8 +60,8 @@
 # create 
   - name: Create device type within Nautobot with only required information
     networktocode.nautobot.device_type:
-      url: "{{ url }}"
-      token: "{{ token }}"
+      url: 192.168.65.150:8088/api #"{{ url }}"
+      token: cff1dc834c369b08dc02c0fa04e1e1e89dd7bb43 #"{{ token }}"
       slug: "{{ ansible_facts['net_model'] }}"
       model: "{{ ansible_facts['net_model'] }}"
       manufacturer: "cisco"
@@ -70,8 +70,8 @@
   - name: "Add Device to nautobot"
     networktocode.nautobot.device:
     #netbox.netbox.netbox_device:
-      url: 192.168.65.150:8088/api #"{{ url }}"
-      token: cff1dc834c369b08dc02c0fa04e1e1e89dd7bb43 #"{{ token }}"
+      url: "{{ url }}"
+      token: "{{ token }}"
       data:
         Name: "{{ fqdn }}"
         manufacturer: "cisco"
