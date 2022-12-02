@@ -21,6 +21,7 @@
       net_version: "111"
     when: ansible_facts['net_version'] is undefined
 
+
   - name: "Check if net_model exists"
     ### If ansible_facts does not provide net_model we manually fill it in as 111
     ansible.builtin.set_fact:
