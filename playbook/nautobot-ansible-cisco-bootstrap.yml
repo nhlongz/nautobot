@@ -91,6 +91,13 @@
       name: "{{ device_role }}"
       state: present
 
+  - name: Create platform within Nautobot with only required information
+    networktocode.nautobot.platform:
+      url: "{{ url }}"
+      token: "{{ token }}"
+      name: "{{ platform }}"
+      state: present
+
 ### add device
   - name: "Add Device to nautobot"
     networktocode.nautobot.device:
