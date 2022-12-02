@@ -26,6 +26,7 @@
     ansible.builtin.set_fact:
       net_model: "111"
     when: ansible_facts['net_model'] is undefined
+    cacheable: yes
 
   - name: "Assign net version"
     set_fact:
