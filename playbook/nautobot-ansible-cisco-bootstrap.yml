@@ -108,13 +108,13 @@
         Name: "{{ fqdn }}"
         manufacturer: "cisco"
         device_type: "{{ ansible_facts['net_model'] }}"
-        platform: "{{ platform }}"
-        serial: "{{ ansible_facts['net_serialnum'] }}"
+#        platform: "{{ platform }}"
+#        serial: "{{ ansible_facts['net_serialnum'] }}"
         site: "{{ site }}"
         device_role: "{{ device_role }}"
         status: "inventory"
-        custom_fields:
-          code_version: "{{ net_version }}"
+#        custom_fields:
+#          code_version: "{{ net_version }}"
       state: present
       validate_certs: no
     delegate_to: localhost
