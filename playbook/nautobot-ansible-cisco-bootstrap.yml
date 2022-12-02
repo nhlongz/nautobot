@@ -19,14 +19,14 @@
   - name: "Check if net_version exists"
     ### If ansible_facts does not provide net_version we manually fill it in as 111
     set_fact:
-      net_version: "NULL"
+      net_version: "Unknown"
       cacheable: yes
     when: ansible_facts['net_version'] is undefined
 
   - name: "Check if net_model exists"
     ### If ansible_facts does not provide net_model we manually fill it in as 111
     ansible.builtin.set_fact:
-      net_model: "NULL"
+      net_model: "Unknown"
       cacheable: yes
     when: ansible_facts['net_model'] is undefined
     
@@ -66,7 +66,7 @@
       name: "{{ fqdn }}"
 #      manufacturer: "cisco"
 #      platform: "{{ platform }}"
-      device_type: "NULL"
+      device_type: "{{ ansible_facts['net_model'] }}"
       device_role: "{{ device_role }}"
       site: "{{ site }}"
       status: active
