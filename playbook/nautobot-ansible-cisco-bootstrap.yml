@@ -92,6 +92,7 @@
       state: present
 
   - name: Create platform within Nautobot with only required information
+    ignore_errors: yes
     networktocode.nautobot.platform:
       url: "{{ url }}"
       token: "{{ token }}"
