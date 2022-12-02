@@ -1,0 +1,106 @@
+
+
+  - name: Create manufacturer within Nautobot with only required information
+    networktocode.nautobot.manufacturer:
+      url: "{{ url }}"
+      token: "{{ token }}"
+      name: "cisco"
+      state: present
+#    when: manufacturer['cisco'] is undefined
+
+  - name: Create device_type within Nautobot with only required information
+    ignore_errors: yes
+    networktocode.nautobot.device_type:
+      url: "{{ url }}"
+      token: "{{ token }}"
+      slug: "{{ ansible_facts['net_model'] }}"
+      model: "{{ ansible_facts['net_model'] }}"
+      manufacturer: "cisco"
+      state: present
+
+  - name: Create site within Nautobot with only required information
+    networktocode.nautobot.site:
+      url: "{{ url }}"
+      token: "{{ token }}"
+      name: "{{ site }}"
+      status: active
+      state: present
+
+  - name: Create device role within Nautobot with only required information
+    networktocode.nautobot.device_role:
+      url: "{{ url }}"
+      token: "{{ token }}"
+      name: "{{ device_role }}"
+      state: present
+
+  - name: Create platform within Nautobot with only required information
+    ignore_errors: yes
+    networktocode.nautobot.platform:
+      url: "{{ url }}"
+      token: "{{ token }}"
+      name: "{{ platform }}"
+      state: present
+
+### add device
+  - name: "Add Device to nautobot"
+    networktocode.nautobot.device:
+      url: "{{ url }}"
+      token: "{{ token }}"
+      data:
+        name: "{{ fqdn }}"
+        manufacturer: "cisco"
+        device_type: "{{ ansible_facts['net_model'] }}"
+#        platform: "{{ platform }}"
+#        serial: "{{ ansible_facts['net_serialnum'] }}"
+        site: "{{ site }}"
+        device_role: "{{ device_role }}"
+        status: "inventory"
+#        custom_fields:
+#          code_version: "{{ net_version }}"
+      state: present
+      validate_certs: no
+    delegate_to: localhost
+
+  - name: "Add a new Interface called management_interface to device"
+    ### this interface will be used as the primary IP and interface for the device
+    networktocode.nautobot.device_interface:
+      url: "{{ url }}"
+      token: "{{ token }}"
+      data:
+        device: "{{ fqdn }}"
+        name: Management_Interface
+        type: other
+      state: present
+      validate_certs: no
+    delegate_to: localhost
+
+  - name: "Add IP address of ansible host to IPAM"
+    #netbox.netbox.netbox_ip_address:
+    networktocode.nautobot.ip_address:
+      url: "{{ url }}"
+      token: "{{ token }}"
+      data:
+        family: 4
+        address: "{{ ansible_host }}/32"
+        status: active
+        assigned_object:
+          name: Management_Interface
+          device: "{{ fqdn }}"
+      state: present
+      validate_certs: no
+    delegate_to: localhost
+
+  - name: "Assign ansible_host IP as the primary interface for the device"
+    networktocode.nautobot.device:
+      url: "{{ url }}"
+      token: "{{ token }}"
+      data:
+        name: "{{ fqdn }}"
+        device_type: "{{ ansible_facts['net_model'] }}"
+        platform: "{{ platform }}"
+        serial: "{{ ansible_facts['net_serialnum'] }}"
+        status: Active
+        primary_ip4: "{{ ansible_host }}/32"
+      state: present
+      validate_certs: no
+    delegate_to: localhost
