@@ -9,8 +9,8 @@
   vars:
     ansible_user:
     ansible_ssh_private_key_file:
-    netbox_url:
-    netbox_token:
+    url: '192.168.65.150:8088/'
+    token: 'cff1dc834c369b08dc02c0fa04e1e1e89dd7bb43'
     platform: "{{ ansible_network_os }}"
     site:
     device_role: "access_switch"
@@ -48,9 +48,10 @@
     when: dig_result.stdout_lines[0] is undefined
 
   - name: "Add Device to NetBox"
-    netbox.netbox.netbox_device:
-      netbox_url: "{{ netbox_url }}"
-      netbox_token: "{{ netbox_token }}"
+    networktocode.nautobot.device:
+    #netbox.netbox.netbox_device:
+      url: "{{ url }}"
+      token: "{{ token }}"
       data:
         name: "{{ fqdn }}"
         device_type: "{{ ansible_facts['net_model'] }}"
@@ -66,9 +67,10 @@
 
   - name: "Add a new Interface called management_interface to device"
     ### this interface will be used as the primary IP and interface for the device
-    netbox.netbox.netbox_device_interface:
-      netbox_url: "{{ netbox_url }}"
-      netbox_token: "{{ netbox_token }}"
+    #netbox.netbox.netbox_device_interface:
+    networktocode.nautobot.device_interface:
+      url: "{{ url }}"
+      token: "{{ token }}"
       data:
         device: "{{ fqdn }}"
         name: Management_Interface
@@ -78,9 +80,10 @@
     delegate_to: localhost
 
   - name: "Add IP address of ansible host to IPAM"
-    netbox.netbox.netbox_ip_address:
-      netbox_url: "{{ netbox_url }}"
-      netbox_token: "{{ netbox_token }}"
+    #netbox.netbox.netbox_ip_address:
+    networktocode.nautobot.ip_address:
+      url: "{{ url }}"
+      token: "{{ token }}"
       data:
         family: 4
         address: "{{ ansible_host }}/32"
@@ -93,9 +96,9 @@
     delegate_to: localhost
 
   - name: "Assign ansible_host IP as the primary interface for the device"
-    netbox.netbox.netbox_device:
-      netbox_url: "{{ netbox_url }}"
-      netbox_token: "{{ netbox_token }}"
+    networktocode.nautobot.device:
+      url: "{{ url }}"
+      token: "{{ token }}"
       data:
         name: "{{ fqdn }}"
         device_type: "{{ ansible_facts['net_model'] }}"
