@@ -23,7 +23,7 @@
 
   - name: "Check if net_model exists"
     ### If ansible_facts does not provide net_model we manually fill it in as 111
-    set_fact:
+    ansible.builtin.set_fact:
       net_model: "111"
     when: ansible_facts['net_model'] is undefined
 
