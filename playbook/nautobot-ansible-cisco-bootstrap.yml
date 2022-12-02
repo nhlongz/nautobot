@@ -69,7 +69,7 @@
         Name: "{{ fqdn }}"
         device_type: "{{ ansible_facts['net_model'] }}"
         platform: "{{ platform }}"
-        serial_number: "{{ ansible_facts['net_serialnum'] }}"
+        serial: "{{ ansible_facts['net_serialnum'] }}"
         site: "{{ site }}"
         device_role: "{{ device_role }}"
         custom_fields:
