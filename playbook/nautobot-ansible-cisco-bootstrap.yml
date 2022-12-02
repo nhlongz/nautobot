@@ -67,6 +67,7 @@
 #    when: manufacturer['cisco'] is undefined
 
   - name: Create device type within Nautobot with only required information
+    ignore_errors: yes
     networktocode.nautobot.device_type:
       url: "{{ url }}"
       token: "{{ token }}"
@@ -74,7 +75,7 @@
       model: "{{ ansible_facts['net_model'] }}"
       manufacturer: "cisco"
       state: present
-    when: device_type['NULL'] is undefined
+
 
 
   - name: "Add Device to nautobot"
