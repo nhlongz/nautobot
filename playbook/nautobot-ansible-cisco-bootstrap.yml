@@ -76,6 +76,13 @@
       manufacturer: "cisco"
       state: present
 
+  - name: Create site within Nautobot with only required information
+    networktocode.nautobot.site:
+      url: "{{ url }}"
+      token: "{{ token }}"
+      name: "{{ site }}"
+      status: active
+      state: present
 
   - name: "Add Device to nautobot"
     networktocode.nautobot.device:
