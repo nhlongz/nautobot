@@ -58,6 +58,13 @@
 
 #-------- ansible create and update infomation from ansible_colected to nautobot------#
 # create 
+  - name: Create manufacturer within Nautobot with only required information
+    networktocode.nautobot.manufacturer:
+      url: "{{ url }}"
+      token: "{{ token }}"
+      name: "cisco"
+      state: present
+
   - name: Create device type within Nautobot with only required information
     networktocode.nautobot.device_type:
       url: "{{ url }}"
@@ -67,9 +74,9 @@
       manufacturer: "cisco"
       state: present
 
+
   - name: "Add Device to nautobot"
     networktocode.nautobot.device:
-    #netbox.netbox.netbox_device:
       url: "{{ url }}"
       token: "{{ token }}"
       data:
@@ -88,7 +95,6 @@
 
   - name: "Add a new Interface called management_interface to device"
     ### this interface will be used as the primary IP and interface for the device
-    #netbox.netbox.netbox_device_interface:
     networktocode.nautobot.device_interface:
       url: "{{ url }}"
       token: "{{ token }}"
