@@ -74,7 +74,7 @@
       model: "{{ ansible_facts['net_model'] }}"
       manufacturer: "cisco"
       state: present
-    when: device_type['"{{ ansible_facts['net_model'] }}"'] is undefined
+    when: device_type['NULL'] is undefined
 
 
   - name: "Add Device to nautobot"
