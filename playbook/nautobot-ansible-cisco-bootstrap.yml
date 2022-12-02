@@ -105,7 +105,7 @@
       url: "{{ url }}"
       token: "{{ token }}"
       data:
-        Name: "{{ fqdn }}"
+        name: "{{ fqdn }}"
         manufacturer: "cisco"
         device_type: "{{ ansible_facts['net_model'] }}"
 #        platform: "{{ platform }}"
