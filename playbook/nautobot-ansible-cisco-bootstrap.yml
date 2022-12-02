@@ -70,8 +70,8 @@
   - name: "Add Device to nautobot"
     networktocode.nautobot.device:
     #netbox.netbox.netbox_device:
-      url: "{{ url }}"
-      token: "{{ token }}"
+      url: 192.168.65.150:8088/api #"{{ url }}"
+      token: cff1dc834c369b08dc02c0fa04e1e1e89dd7bb43 #"{{ token }}"
       data:
         Name: "{{ fqdn }}"
         manufacturer: "cisco"
@@ -90,8 +90,8 @@
     ### this interface will be used as the primary IP and interface for the device
     #netbox.netbox.netbox_device_interface:
     networktocode.nautobot.device_interface:
-      url: 192.168.65.150:8088/api #"{{ url }}"
-      token: cff1dc834c369b08dc02c0fa04e1e1e89dd7bb43 #"{{ token }}"
+      url: "{{ url }}"
+      token: "{{ token }}"
       data:
         device: "{{ fqdn }}"
         name: Management_Interface
