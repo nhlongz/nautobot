@@ -1,0 +1,109 @@
+### Playbook to bootstrap netbox inventory with a list of juniper devices provided by static inventory file
+# Uses ansible gather_facts to grab net_version, serial number and net_model
+# Also perform a dig to get a FQDN which we can use as device name instead of the inventory_name
+
+---
+- name: PB to Bootstrap Netbox Inventory
+  hosts: site01
+  gather_facts: True
+  vars:
+    #ansible_user:
+    #ansible_ssh_private_key_file:
+    url: 'http://192.168.65.150:8088/'
+    token: 'cff1dc834c369b08dc02c0fa04e1e1e89dd7bb43'
+    platform: "{{ ansible_network_os }}"
+    site: "{{ site_name }}"
+    device_role: "{{ role }}"
+  tasks:
+#------- ansible colected infomation hosts. ------#
+  - name: "Check if net_version exists"
+    ### If ansible_facts does not provide net_version we manually fill it in as 111
+    set_fact:
+      net_version: "unknown"
+      cacheable: yes
+    when: ansible_facts['net_version'] is undefined
+
+  - name: "Check if net_model exists"
+    ### If ansible_facts does not provide net_model we manually fill it in as 111
+    ansible.builtin.set_fact:
+      net_model: "unknown"
+      cacheable: yes
+    when: ansible_facts['net_model'] is undefined
+    
+  - name: "Assign net version"
+    set_fact:
+      net_version: "{{ ansible_facts['net_version'] }}"
+    when: ansible_facts['net_version'] is defined
+
+  ### Optional
+  - name: "Resolve FQDN Hostname - perform DIG"
+    ### Perform linux DIG command to get the reverse DNS record for the IP. THis will be our new hostname for netbox
+    raw: "dig -x {{ ansible_host }} +short | sed -e 's/.$//'"
+    register: dig_result
+    delegate_to: localhost
+
+  ### Optional
+  - name: "TASK 11: Assign dig result to fqdn var"
+    ### If Reverse DNS exists, trim whhite spaces and assing to var
+    set_fact:
+      fqdn: "{{ dig_result.stdout_lines[0] | trim}}"
+    when: dig_result.stdout_lines[0] is defined
+
+  ### Optional
+  - name: "TASK 12: If no dig result, assign placeholder fqdn value"
+    ### If no reverse DNS, then set a inventory hostname and IP as the hostname
+    set_fact:
+      fqdn: "{{ inventory_hostname }}-no-dns-{{ ansible_host }}"
+    when: dig_result.stdout_lines[0] is undefined
+
+#-------- ansible create and update infomation from ansible_colected to nautobot------#
+# create manufacturer, device_type, site, device_role, platporm.
+  - name: Create manufacturer within Nautobot with only required information
+    networktocode.nautobot.manufacturer:
+      url: "{{ url }}"
+      token: "{{ token }}"
+      name: "cisco"
+      state: present
+  - name: Create device_type within Nautobot with only required information
+    ignore_errors: yes
+    networktocode.nautobot.device_type:
+      url: "{{ url }}"
+      token: "{{ token }}"
+      slug: "{{ ansible_facts['net_model'] }}"
+      model: "{{ ansible_facts['net_model'] }}"
+      manufacturer: "cisco"
+      state: present
+  - name: Create site within Nautobot with only required information
+    networktocode.nautobot.site:
+      url: "{{ url }}"
+      token: "{{ token }}"
+      name: "{{ site }}"
+      status: active
+      state: present
+  - name: Create device role within Nautobot with only required information
+    networktocode.nautobot.device_role:
+      url: "{{ url }}"
+      token: "{{ token }}"
+      name: "{{ device_role }}"
+      state: present
+  - name: Create platform within Nautobot with only required information
+    ignore_errors: yes
+    networktocode.nautobot.platform:
+      url: "{{ url }}"
+      token: "{{ token }}"
+      name: "{{ platform }}"
+      state: present
+
+#####---- create devices ------######
+  - name: Create device within Nautobot with only required information
+    networktocode.nautobot.device:
+      url: "{{ url }}"
+      token: "{{ token }}"
+      name: "{{ fqdn }}"
+      platform: "{{ platform }}"
+      device_type: "{{ ansible_facts['net_model'] }}"
+      device_role: "{{ device_role }}"
+      site: "{{ site }}"
+      status: active
+      state: present
+
