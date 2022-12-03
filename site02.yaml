@@ -1,16 +1,14 @@
----
 all:
   children:
-    site01:
+    site02:
       children:
         access_switches:
           hosts:
-            site01-access1:         
-            site01-access2: 
-            site01-access3: 
+            site02-access1:         
+            site02-access2: 
+            site02-access3: 
         core_switches:
           hosts:
             site01-core1: 
             site01-core2: 
-
-
+  
