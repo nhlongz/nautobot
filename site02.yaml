@@ -7,8 +7,8 @@ all:
             site02-access1:         
             site02-access2: 
             site02-access3: 
-          vars:
-            - role_group: switch_access
+        vars:
+          - role_group: switch_access
         site02_core:
           hosts:
             site02-core1: 
