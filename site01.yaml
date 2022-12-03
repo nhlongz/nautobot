@@ -8,14 +8,14 @@ all:
             site01-access1:         
             site01-access2: 
             site01-access3: 
-#          vars:
-#            - role_group: switch_access
+          vars:
+            role_group: switch_access
         site01_core:
           hosts:
             site01-core1: 
             site01-core2: 
-#          vars:
-#            - role_group: switch_core
+          vars:
+            role_group: switch_core
 
 
 

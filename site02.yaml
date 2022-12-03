@@ -13,6 +13,6 @@ all:
           hosts:
             site02-core1: 
             site02-core2: 
-#          vars:
-#            - role_group: switch_core
+          vars:
+            role_group: switch_core
   
