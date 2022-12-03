@@ -59,6 +59,7 @@
 #-------- ansible create and update infomation from ansible_colected to nautobot------#
 # create manufacturer, device_type, site, device_role, platporm.
   - name: Create manufacturer within Nautobot with only required information
+    ignore_errors: yes
     networktocode.nautobot.manufacturer:
       url: "{{ url }}"
       token: "{{ token }}"
@@ -74,6 +75,7 @@
       manufacturer: "{{ manu }}"
       state: present
   - name: Create site within Nautobot with only required information
+    ignore_errors: yes
     networktocode.nautobot.site:
       url: "{{ url }}"
       token: "{{ token }}"
@@ -81,6 +83,7 @@
       status: active
       state: present
   - name: Create device role within Nautobot with only required information
+    ignore_errors: yes
     networktocode.nautobot.device_role:
       url: "{{ url }}"
       token: "{{ token }}"
