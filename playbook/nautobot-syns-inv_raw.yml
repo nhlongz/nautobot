@@ -13,7 +13,7 @@
     token: 'cff1dc834c369b08dc02c0fa04e1e1e89dd7bb43'
     platform: "{{ ansible_network_os }}"
     site: "{{ site_name }}"
-    device_role: "{{ role }}"
+    device_role: "{{ role_group }}"
   tasks:
 #------- ansible colected infomation hosts. ------#
   - name: "Check if net_version exists"
@@ -62,7 +62,7 @@
     networktocode.nautobot.manufacturer:
       url: "{{ url }}"
       token: "{{ token }}"
-      name: "cisco"
+      name: "{{ manu }}"
       state: present
   - name: Create device_type within Nautobot with only required information
     ignore_errors: yes
@@ -71,7 +71,7 @@
       token: "{{ token }}"
       slug: "{{ ansible_facts['net_model'] }}"
       model: "{{ ansible_facts['net_model'] }}"
-      manufacturer: "cisco"
+      manufacturer: "{{ manu }}"
       state: present
   - name: Create site within Nautobot with only required information
     networktocode.nautobot.site:
