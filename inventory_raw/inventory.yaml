@@ -1,0 +1,14 @@
+---
+all:
+  children:
+    site01:
+      children:
+        access_switches:
+          hosts:
+            site01-sw1:         
+            site01-sw2: 
+            site01-sw3: 
+        core_switches:
+          hosts:
+            site01-core1: 
+            site01-core2: 
