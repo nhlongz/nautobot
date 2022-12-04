@@ -1,0 +1,140 @@
+{
+    "ansible_facts": {
+        "ansible_network_resources": {},
+        "ansible_net_gather_network_resources": [],
+        "ansible_net_gather_subset": [
+            "interfaces",
+            "hardware",
+            "default",
+            "config"
+        ],
+        "ansible_net_all_ipv4_addresses": [
+            "192.168.65.205"
+        ],
+        "ansible_net_all_ipv6_addresses": [],
+        "ansible_net_neighbors": {
+            "Ethernet0/3": [
+                {
+                    "host": "ACCESS-2.site-01.vn",
+                    "port": "Ethernet0/3"
+                },
+                {
+                    "host": "ACCESS-3.site-01.vn",
+                    "port": "Ethernet1/0"
+                },
+                {
+                    "host": "CORE-1.site-01.vn",
+                    "port": "Ethernet1/2"
+                },
+                {
+                    "host": "CORE-2.site-01.vn",
+                    "port": "Ethernet1/2"
+                },
+                {
+                    "host": "R-active.site-01.vn",
+                    "port": "Ethernet0/0"
+                },
+                {
+                    "host": "R-backup.site-01.vn",
+                    "port": "Ethernet0/0"
+                }
+            ],
+            "Ethernet0/0": [
+                {
+                    "host": "CORE-1.site-01.vn",
+                    "port": "Ethernet0/1"
+                }
+            ],
+            "Ethernet0/1": [
+                {
+                    "host": "CORE-2.site-01.vn",
+                    "port": "Ethernet0/1"
+                }
+            ]
+        },
+        "ansible_net_interfaces": {
+            "Ethernet0/0": {
+                "description": null,
+                "macaddress": "aabb.cc00.0300",
+                "mtu": 1500,
+                "bandwidth": 10000,
+                "mediatype": "RJ45",
+                "duplex": null,
+                "lineprotocol": null,
+                "operstatus": "up",
+                "type": "Ethernet",
+                "ipv4": []
+            },
+            "Ethernet0/1": {
+                "description": null,
+                "macaddress": "aabb.cc00.0310",
+                "mtu": 1500,
+                "bandwidth": 10000,
+                "mediatype": "RJ45",
+                "duplex": null,
+                "lineprotocol": null,
+                "operstatus": "up",
+                "type": "Ethernet",
+                "ipv4": []
+            },
+            "Ethernet0/2": {
+                "description": null,
+                "macaddress": "aabb.cc00.0320",
+                "mtu": 1500,
+                "bandwidth": 10000,
+                "mediatype": "RJ45",
+                "duplex": null,
+                "lineprotocol": null,
+                "operstatus": "up",
+                "type": "Ethernet",
+                "ipv4": []
+            },
+            "Ethernet0/3": {
+                "description": null,
+                "macaddress": "aabb.cc00.0330",
+                "mtu": 1500,
+                "bandwidth": 10000,
+                "mediatype": "RJ45",
+                "duplex": null,
+                "lineprotocol": null,
+                "operstatus": "up",
+                "type": "Ethernet",
+                "ipv4": [
+                    {
+                        "address": "192.168.65.205",
+                        "subnet": "24"
+                    }
+                ]
+            }
+        },
+        "ansible_net_filesystems": [
+            "unix:"
+        ],
+        "ansible_net_filesystems_info": {
+            "unix:": {
+                "spacetotal_kb": 2097148,
+                "spacefree_kb": 2097148
+            }
+        },
+        "ansible_net_memtotal_mb": 229289.171875,
+        "ansible_net_memfree_mb": 143643.125,
+        "ansible_net_system": "ios",
+        "ansible_net_image": "unix:/opt/unetlab/tmp/1/10/i86bi_LinuxL2-AdvEnterpriseK9-M_152_May_20",
+        "ansible_net_version": "15.2(CML_NIGHTLY_20180510)FLO_DSGS7",
+        "ansible_net_hostname": "ACCESS-1",
+        "ansible_net_api": "cliconf",
+        "ansible_net_python_version": "3.6.8",
+        "ansible_net_iostype": "IOS",
+        "ansible_net_serialnum": "67129347",
+        "ansible_net_config": "!\n! Last configuration change at 04:57:47 UTC Fri Dec 2 2022\n!\nversion 15.2\nservice timestamps debug datetime msec\nservice timestamps log datetime msec\nno service password-encryption\nservice compress-config\n!\nhostname ACCESS-1\n!\nboot-start-marker\nboot-end-marker\n!\n!\n!\nusername cisco privilege 15 password 0 cisco@123\nno aaa new-model\n!\n!\n!\n!\n!\n!\n!\n!\nip domain-name site-01.vn\nip cef\nno ipv6 cef\n!\n!\n!\nspanning-tree mode pvst\nspanning-tree extend system-id\n!\n!\n! \n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\ninterface Ethernet0/0\n!\ninterface Ethernet0/1\n!\ninterface Ethernet0/2\n!\ninterface Ethernet0/3\n no switchport\n ip address 192.168.65.205 255.255.255.0\n!\nip forward-protocol nd\n!\nip http server\n!\nip ssh version 2\nip ssh server algorithm encryption aes128-ctr aes192-ctr aes256-ctr\nip ssh client algorithm encryption aes128-ctr aes192-ctr aes256-ctr\n!\n!\n!\n!\n!\ncontrol-plane\n!\n!\nline con 0\n logging synchronous\nline aux 0\nline vty 0 4\n login local\n transport input ssh\n!\n!\n!\nend",
+        "discovered_interpreter_python": "/usr/bin/python3.6"
+    },
+    "warnings": [
+        "default value for `gather_subset` will be changed to `min` from `!config` v2.11 onwards",
+        "Platform linux on host site01-access1 is using the discovered Python interpreter at /usr/bin/python3.6, but future installation of another Python interpreter could change this. See https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information."
+    ],
+    "deprecations": [],
+    "_ansible_verbose_override": true,
+    "_ansible_no_log": false,
+    "changed": false
+}
