@@ -119,11 +119,12 @@
       url: "{{ url }}"
       token: "{{ token }}"
       device: "{{ fqdn }}"
-      name: "{{ ansible_facts['ansible_net_interfaces'][0] }}"  
+      name: "{{ item }}"  
       #type: other
       mgmt_only: true
       state: present
       validate_certs: no
+    with_items: "{{ ansible_facts.ansible_net_interfaces.keys() }}"
     delegate_to: localhost
 
 
