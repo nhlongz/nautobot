@@ -17,16 +17,16 @@
   tasks:
 #------- ansible colected infomation hosts. ------#
   - name: "Check if net_version exists"
-    ### If ansible_facts does not provide net_version we manually fill it in as 111
+    ### If ansible_facts does not provide net_version we manually fill it in as unknown
     set_fact:
       net_version: "unknown"
       cacheable: yes
     when: ansible_facts['net_version'] is undefined
 
   - name: "Check if net_model exists"
-    ### If ansible_facts does not provide net_model we manually fill it in as 111
+    ### If ansible_facts does not provide net_model we manually fill it in as unknown
     ansible.builtin.set_fact:
-      net_model: "unknown"
+      net_model: "{{ ansible_facts['net_version'] }}"
       cacheable: yes
     when: ansible_facts['net_model'] is undefined
     
