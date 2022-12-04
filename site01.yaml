@@ -10,7 +10,7 @@ all:
             site01-access3: 
           vars:
             role_group: switch_access
-            role_color: "64FF33"
+            role_color: "38E202"
         site01_core:
           hosts:
             site01-core1: 
