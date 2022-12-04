@@ -126,4 +126,18 @@
     loop:   "{{ ansible_facts.net_interfaces.keys() | list }}"
     delegate_to: localhost
 
+  - name: "Add IP address of ansible host to IPAM"
+    #networktocode.nautobot.ip_address:
+    networktocode.nautobot.ip_address:
+      url: "{{ url }}"
+      token: "{{ token }}"
+      address: "{{ ansible_host }}/32"
+      status: active
+      assigned_object:
+        name: Management_Interface
+        device: "{{ fqdn }}"
+      state: present
+      validate_certs: no
+    delegate_to: localhost
+
 
