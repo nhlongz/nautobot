@@ -141,3 +141,18 @@
     delegate_to: localhost
 
 
+  - name: "Assign ansible_host IP as the primary interface for the device"
+    networktocode.nautobot.device:
+      url: "{{ url }}"
+      token: "{{ token }}"
+      name: "{{ fqdn }}"
+      device_type: "{{ ansible_facts['net_model'] }}"
+      platform: "{{ platform }}"
+      serial: "{{ ansible_facts['net_serialnum'] }}"
+      status: Active
+      primary_ip4: "{{ ansible_host }}/32"
+      state: present
+      validate_certs: no
+    delegate_to: localhost
+
+
