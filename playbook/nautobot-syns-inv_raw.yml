@@ -114,6 +114,15 @@
       state: present
 
     ### this interface will be used as the primary IP and interface for the device
-
+  - name: Create interface within Nautobot with only required information
+    networktocode.nautobot.device_interface:
+      url: "{{ url }}"
+      token: "{{ token }}"
+      device: "{{ fqdn }}"
+      name: "{{ item }}" 
+      state: present
+      validate_certs: no
+    loop:   "{{ ansible_facts.net_interfaces.keys() | list }}"
+    delegate_to: localhost
 
 
