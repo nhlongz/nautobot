@@ -88,6 +88,7 @@
       url: "{{ url }}"
       token: "{{ token }}"
       name: "{{ device_role }}"
+      color: "{{ role_color }}"
       state: present
   - name: Create platform within Nautobot with only required information
     ignore_errors: yes
@@ -124,6 +125,18 @@
       state: present
       validate_certs: no
     loop:   "{{ ansible_facts.net_interfaces.keys() | list }}"
+    delegate_to: localhost
+
+  - name: "Add a new Interface called management_interface to device"
+    ### this interface will be used as the primary IP and interface for the device
+    networktocode.nautobot.device_interface:
+      url: "{{ url }}"
+      token: "{{ token }}"
+      device: "{{ fqdn }}"
+      name: Management_Interface
+      type: "virtual"
+      state: present
+      validate_certs: no
     delegate_to: localhost
 
   - name: "Add IP address of ansible host to IPAM"
