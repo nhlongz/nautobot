@@ -109,6 +109,7 @@
       site: "{{ site }}"
       custom_fields:
         firmware_version: "{{ net_version }}"
+      serial: "{{ ansible_facts['net_serialnum'] }}"
       status: active
       state: present
 
