@@ -108,7 +108,7 @@
       device_role: "{{ device_role }}"
       site: "{{ site }}"
       custom_fields:
-        code_version: "{{ net_version }}"
+        firmware_version: "{{ net_version }}"
       status: active
       state: present
 
