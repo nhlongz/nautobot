@@ -113,17 +113,6 @@
       status: active
       state: present
 
-### this interface will be used as the primary IP and interface for the device
-  - name: "Add a new Interface called management_interface to device"
-    networktocode.nautobot.device_interface:
-      url: "{{ url }}"
-      token: "{{ token }}"
-      device: "{{ fqdn }}"
-      name: "{{ ansible_facts['ansible_net_interfaces'] }}"  
-      #type: other
-      mgmt_only: true
-      state: present
-      validate_certs: no
-    delegate_to: localhost
+
 
 
