@@ -120,6 +120,7 @@
       token: "{{ token }}"
       device: "{{ fqdn }}"
       name: "{{ item }}" 
+      type: "virtual"
       state: present
       validate_certs: no
     loop:   "{{ ansible_facts.net_interfaces.keys() | list }}"
