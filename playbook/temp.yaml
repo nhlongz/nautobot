@@ -55,8 +55,8 @@
         site: "{{ site }}"
         device_role: "{{ device_role }}"
         status: "inventory"
-#        custom_fields:
-#          code_version: "{{ net_version }}"
+        custom_fields:
+          code_version: "{{ net_version }}"
       state: present
       validate_certs: no
     delegate_to: localhost
