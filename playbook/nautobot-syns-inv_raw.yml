@@ -80,6 +80,7 @@
       url: "{{ url }}"
       token: "{{ token }}"
       name: "{{ site }}"
+      region: "{{ site_Region }}"
       status: active
       state: present
   - name: Create device role within Nautobot with only required information
