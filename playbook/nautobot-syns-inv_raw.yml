@@ -129,20 +129,6 @@
     with_dict:   "{{ ansible_facts.net_interfaces }}"
     delegate_to: localhost
 
-  - name: "Add a new Interface called management_interface to device"
-    ### this interface will be used as the primary IP and interface for the device
-    networktocode.nautobot.device_interface:
-      url: "{{ url }}"
-      token: "{{ token }}"
-      device: "{{ fqdn }}"
-      name: Management_Interface
-      type: "virtual"
-      state: present
-      validate_certs: no
-    when: ansible_facts['net_version'] is undefined
-    with_dict:   "{{ ansible_facts.net_interfaces }}"
-    delegate_to: localhost
-
   - name: "Add IP address of ansible host to IPAM"
     #networktocode.nautobot.ip_address:
     networktocode.nautobot.ip_address:
@@ -151,7 +137,7 @@
       address: "{{ ansible_host }}/32"
       status: active
       assigned_object:
-        name: Management_Interface
+        name: "{{ item.key }}" 
         device: "{{ fqdn }}"
       state: present
       validate_certs: no
