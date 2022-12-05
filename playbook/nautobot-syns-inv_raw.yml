@@ -141,7 +141,7 @@
         device: "{{ fqdn }}"
       state: present
       validate_certs: no
-    when: item.value.ipv4.address is defined 
+    when: item.value.ipv4['address'] is defined 
     with_dict:   "{{ ansible_facts.net_interfaces }}"
     delegate_to: localhost
 
