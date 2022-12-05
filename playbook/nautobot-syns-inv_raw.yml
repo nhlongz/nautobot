@@ -110,6 +110,7 @@
       token: "{{ token }}"
       name: "Rack_{{ site }}"
       site: Test Site
+      region: "{{ site_Region }}"
       status: active
       state: present
 
