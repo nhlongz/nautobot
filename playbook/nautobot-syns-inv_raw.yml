@@ -141,7 +141,7 @@
         device: "{{ fqdn }}"
       state: present
       validate_certs: no
-    when: key not in item.ipv4.keys() and item.ipv4.value.address == "{{ ansible_host }}"
+    when: key not in item.ipv4.keys() 
     with_dict:   "{{ ansible_facts.net_interfaces }}"
     delegate_to: localhost
 
