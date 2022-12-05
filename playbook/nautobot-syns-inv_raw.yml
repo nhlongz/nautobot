@@ -57,7 +57,7 @@
     when: dig_result.stdout_lines[0] is undefined
 
 #-------- ansible create and update infomation from ansible_colected to nautobot------#
-# create manufacturer, device_type, site, device_role, platporm.
+# create manufacturer, device_type, site, device_role, platporm, region,rack.
   - name: Create manufacturer within Nautobot with only required information
     ignore_errors: yes
     networktocode.nautobot.manufacturer:
