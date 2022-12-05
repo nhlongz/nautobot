@@ -135,6 +135,7 @@
       url: "{{ url }}"
       token: "{{ token }}"
       address: "{{ ansible_host }}"
+      mgmt_only: true
       status: active
       assigned_object:
         name: "{{ item.key }}" 
