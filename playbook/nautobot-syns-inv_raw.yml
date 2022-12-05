@@ -121,9 +121,13 @@
       token: "{{ token }}"
       device: "{{ fqdn }}"
       name: "{{ item }}" 
+      mac_address: "{{ ansible_facts.net_interfaces.item['macaddress'] }}"
+      mtu: "{{ ansible_facts.net_interfaces.item['mtu'] }}"
       type: "virtual"
       state: present
       validate_certs: no
     loop:   "{{ ansible_facts.net_interfaces.keys() | list }}"
     delegate_to: localhost
+
+
 
