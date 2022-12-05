@@ -101,7 +101,7 @@
     networktocode.nautobot.region:
       url: "{{ url }}"
       token: "{{ token }}"
-      name: "Test Region One"
+      name: "{{ site_Region }}"
       state: present
 
 #####---- create devices ------######
