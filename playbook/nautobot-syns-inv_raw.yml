@@ -97,6 +97,12 @@
       token: "{{ token }}"
       name: "{{ platform }}"
       state: present
+  - name: Create tenant within Nautobot with only required information
+    networktocode.nautobot.region:
+      url: "{{ url }}"
+      token: "{{ token }}"
+      name: "Test Region One"
+      state: present
 
 #####---- create devices ------######
   - name: Create device within Nautobot with only required information
