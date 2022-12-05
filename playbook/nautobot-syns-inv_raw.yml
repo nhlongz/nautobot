@@ -136,7 +136,6 @@
       url: "{{ url }}"
       token: "{{ token }}"
       address: "{{ ansible_host }}"
-      prefix: 192.168.65.0/24
       status: active
       assigned_object:
         name: "{{ item.key }}" 
