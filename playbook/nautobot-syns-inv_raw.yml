@@ -104,6 +104,14 @@
       token: "{{ token }}"
       name: "{{ site_Region }}"
       state: present
+  - name: Create rack within Nautobot with only required information
+    networktocode.nautobot.rack:
+      url: "{{ url }}"
+      token: "{{ token }}"
+      name: "Rack_{{ site }}"
+      site: Test Site
+      status: active
+      state: present
 
 #####---- create devices ------######
   - name: Create device within Nautobot with only required information
