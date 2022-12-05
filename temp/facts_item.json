@@ -1,0 +1,47 @@
+
+{
+    "changed": false,
+    "skip_reason": "Conditional result was False",
+    "_ansible_no_log": false,
+    "item": {
+        "key": "Ethernet0/3",
+        "value": {
+            "description": null,
+            "macaddress": "aabb.cc00.0330",
+            "mtu": 1500,
+            "bandwidth": 10000,
+            "mediatype": "RJ45",
+            "duplex": null,
+            "lineprotocol": null,
+            "operstatus": "up",
+            "type": "Ethernet",
+            "ipv4": [
+                {
+                    "address": "192.168.65.205",
+                    "subnet": "24"
+                }
+            ]
+        }
+    },
+    "ansible_loop_var": "item",
+    "_ansible_item_label": {
+        "key": "Ethernet0/3",
+        "value": {
+            "description": null,
+            "macaddress": "aabb.cc00.0330",
+            "mtu": 1500,
+            "bandwidth": 10000,
+            "mediatype": "RJ45",
+            "duplex": null,
+            "lineprotocol": null,
+            "operstatus": "up",
+            "type": "Ethernet",
+            "ipv4": [
+                {
+                    "address": "192.168.65.205",
+                    "subnet": "24"
+                }
+            ]
+        }
+    }
+}
