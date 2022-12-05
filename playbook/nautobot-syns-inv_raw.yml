@@ -141,7 +141,6 @@
         device: "{{ fqdn }}"
       state: present
       validate_certs: no
-    #when: item.value|selectattr("ipv4", "defined")|list|length >0 and item.value.ipv4.address == ansible_host
     when: item.value.ipv4.0.address is defined and item.value.ipv4.0.address == ansible_host
     with_dict:   "{{ ansible_facts.net_interfaces }}"
     delegate_to: localhost
