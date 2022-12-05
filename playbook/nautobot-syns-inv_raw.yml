@@ -134,7 +134,7 @@
     networktocode.nautobot.ip_address:
       url: "{{ url }}"
       token: "{{ token }}"
-      address: "{{ ansible_host }}/32"
+      address: "{{ ansible_host }}/{{ item.value.ipv4.0.subnet }}"
       status: active
       assigned_object:
         name: "{{ item.key }}" 
