@@ -108,9 +108,10 @@
       device_type: "{{ ansible_facts['net_model'] }}"
       device_role: "{{ device_role }}"
       site: "{{ site }}"
+      serial: "{{ ansible_facts['net_serialnum'] }}"
+      primary_ip4: "{{ ansible_host }}/32"
       custom_fields:
         firmware_version: "{{ net_version }}"
-      serial: "{{ ansible_facts['net_serialnum'] }}"
       status: active
       state: present
 
