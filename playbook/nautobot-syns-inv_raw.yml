@@ -76,6 +76,23 @@
       manufacturer: "{{ manu }}"
       state: present
     delegate_to: localhost
+  - name: Create region_zone within Nautobot with only required information
+    ignore_errors: yes
+    networktocode.nautobot.region:
+      url: "{{ url }}"
+      token: "{{ token }}"
+      name: "{{ site_zone }}"
+      state: present
+    delegate_to: localhost
+  - name: Create region within Nautobot with only required information
+    ignore_errors: yes
+    networktocode.nautobot.region:
+      url: "{{ url }}"
+      token: "{{ token }}"
+      name: "{{ site_Region }}"
+      parent_region: "{{ site_zone }}"
+      state: present
+    delegate_to: localhost
   - name: Create site within Nautobot with only required information
     ignore_errors: yes
     networktocode.nautobot.site:
@@ -101,14 +118,6 @@
       url: "{{ url }}"
       token: "{{ token }}"
       name: "{{ platform }}"
-      state: present
-    delegate_to: localhost
-  - name: Create region within Nautobot with only required information
-    ignore_errors: yes
-    networktocode.nautobot.region:
-      url: "{{ url }}"
-      token: "{{ token }}"
-      name: "{{ site_Region }}"
       state: present
     delegate_to: localhost
   - name: Create rack within Nautobot with only required information
