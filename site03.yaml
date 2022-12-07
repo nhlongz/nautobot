@@ -1,0 +1,36 @@
+---
+all:
+  children:
+    site03:
+      children:
+        site03_access:
+          hosts:
+            site03-access1:
+              vars:
+                ansible_host: 10.0.3.2
+                ansible_connection: network_cli
+                ansible_network_os: ios
+                manu: cisco         
+            site03-access2:
+              vars:
+                ansible_host: 10.0.3.3
+                ansible_connection: network_cli
+                ansible_network_os: ios
+                manu: cisco 
+          vars:
+            role_group: switch_access
+            role_color: "27AE60"
+        site03_core:
+          hosts:
+            site03-core:
+              vars:
+                ansible_host: 10.0.3.1
+                ansible_connection: network_cli
+                ansible_network_os: ios
+                manu: cisco  
+          vars:
+            role_group: switch_core
+            role_color: "CB4335"
+
+
+
