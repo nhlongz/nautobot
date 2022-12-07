@@ -14,7 +14,7 @@
     platform: "{{ ansible_network_os }}"
     site: "{{ site_name }}"
     device_role: "{{ role_group }}"
-    position_default: [38,36,34,32,30,28,26,24,22,20]
+    position_default: 38
   tasks:
 #------- ansible colected infomation hosts. ------#
   - name: "Check if net_version exists"
@@ -208,8 +208,7 @@
       position: item
       face: Front
       state: present
-    with_items: position_default
+    with_items: [38,36,34,32,30,28,26,24,22,20]
     register: put_status
     until: put_status.rc | default('') == 0
     delegate_to: localhost
-    
