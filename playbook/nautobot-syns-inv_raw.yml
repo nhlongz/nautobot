@@ -210,5 +210,6 @@
       state: present
     with_items: position_default
     register: put_status
-    until: put_status.rc == 0
+    until: put_status.rc | default('') == 0
     delegate_to: localhost
+    
