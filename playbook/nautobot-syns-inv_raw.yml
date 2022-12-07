@@ -65,6 +65,7 @@
       token: "{{ token }}"
       name: "{{ manu }}"
       state: present
+    delegate_to: localhost
   - name: Create device_type within Nautobot with only required information
     ignore_errors: yes
     networktocode.nautobot.device_type:
@@ -74,6 +75,7 @@
       model: "{{ ansible_facts['net_model'] }}"
       manufacturer: "{{ manu }}"
       state: present
+    delegate_to: localhost
   - name: Create site within Nautobot with only required information
     ignore_errors: yes
     networktocode.nautobot.site:
@@ -83,6 +85,7 @@
       region: "{{ site_Region }}"
       status: active
       state: present
+    delegate_to: localhost
   - name: Create device role within Nautobot with only required information
     ignore_errors: yes
     networktocode.nautobot.device_role:
@@ -91,6 +94,7 @@
       name: "{{ device_role }}"
       color: "{{ role_color }}"
       state: present
+    delegate_to: localhost
   - name: Create platform within Nautobot with only required information
     ignore_errors: yes
     networktocode.nautobot.platform:
@@ -98,6 +102,7 @@
       token: "{{ token }}"
       name: "{{ platform }}"
       state: present
+    delegate_to: localhost
   - name: Create region within Nautobot with only required information
     ignore_errors: yes
     networktocode.nautobot.region:
@@ -105,6 +110,7 @@
       token: "{{ token }}"
       name: "{{ site_Region }}"
       state: present
+    delegate_to: localhost
   - name: Create rack within Nautobot with only required information
     ignore_errors: yes
     networktocode.nautobot.rack:
@@ -114,6 +120,7 @@
       site: "{{ site }}"
       status: active
       state: present
+    delegate_to: localhost
 
 #####---- create devices ------######
   - name: Create device within Nautobot with only required information
@@ -126,11 +133,11 @@
       device_role: "{{ device_role }}"
       site: "{{ site }}"
       serial: "{{ ansible_facts['net_serialnum'] }}"
-      primary_ip4: "{{ ansible_host }}/32"
       custom_fields:
         firmware_version: "{{ net_version }}"
       status: active
       state: present
+    delegate_to: localhost
 
     ### this interface will be used as the primary IP and interface for the device
   - name: Create interface within Nautobot with only required information
@@ -163,4 +170,20 @@
     with_dict:   "{{ ansible_facts.net_interfaces }}"
     delegate_to: localhost
 
+  - name: "Assign ansible_host IP as the primary interface for the device"
+    networktocode.nautobot.device:
+      url: "{{ url }}"
+      token: "{{ token }}"
+      name: "{{ fqdn }}"
+      platform: "{{ platform }}"
+      device_type: "{{ ansible_facts['net_model'] }}"
+      device_role: "{{ device_role }}"
+      site: "{{ site }}"
+      serial: "{{ ansible_facts['net_serialnum'] }}"
+      primary_ip4: "{{ ansible_host }}/32"
+      custom_fields:
+        firmware_version: "{{ net_version }}"
+      status: active
+      state: present
+    delegate_to: localhost
 
