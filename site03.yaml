@@ -16,6 +16,3 @@ all:
           vars:
             role_group: switch_core
             role_color: "CB4335"
-
-
-

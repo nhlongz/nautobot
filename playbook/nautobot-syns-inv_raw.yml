@@ -98,13 +98,15 @@
       token: "{{ token }}"
       name: "{{ platform }}"
       state: present
-  - name: Create tenant within Nautobot with only required information
+  - name: Create region within Nautobot with only required information
+    ignore_errors: yes
     networktocode.nautobot.region:
       url: "{{ url }}"
       token: "{{ token }}"
       name: "{{ site_Region }}"
       state: present
   - name: Create rack within Nautobot with only required information
+    ignore_errors: yes
     networktocode.nautobot.rack:
       url: "{{ url }}"
       token: "{{ token }}"
