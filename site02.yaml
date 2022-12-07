@@ -4,15 +4,40 @@ all:
       children:
         site02_access:
           hosts:
-            site02-access1:         
+            site02-access1:    
+              vars:
+                ansible_host: 10.0.2.3
+                ansible_connection: network_cli
+                ansible_network_os: ios
+                manu: cisco      
             site02-access2: 
-            site02-access3: 
+              vars:
+                ansible_host: 10.0.2.4
+                ansible_connection: network_cli
+                ansible_network_os: ios
+                manu: cisco  
+            site02-access3:
+              vars:
+                ansible_host: 10.0.2.5
+                ansible_connection: network_cli
+                ansible_network_os: ios
+                manu: cisco   
           vars:
             role_group: switch_access
         site02_core:
           hosts:
             site02-core1: 
+              vars:
+                ansible_host: 10.0.2.1
+                ansible_connection: network_cli
+                ansible_network_os: ios
+                manu: cisco  
             site02-core2: 
+              vars:
+                ansible_host: 10.0.2.2
+                ansible_connection: network_cli
+                ansible_network_os: ios
+                manu: cisco  
           vars:
             role_group: switch_core
   

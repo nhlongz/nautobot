@@ -170,6 +170,7 @@
     with_dict:   "{{ ansible_facts.net_interfaces }}"
     delegate_to: localhost
 
+# set primary ip.
   - name: "Assign ansible_host IP as the primary interface for the device"
     networktocode.nautobot.device:
       url: "{{ url }}"
