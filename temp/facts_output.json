@@ -1,3 +1,4 @@
+no
 {
     "ansible_facts": {
         "ansible_network_resources": {},
