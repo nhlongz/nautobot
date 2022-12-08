@@ -199,7 +199,8 @@
     delegate_to: localhost
 
 # add devices to the rack.
-- hosts: site03
+- name: PB to Bootstrap Netbox Inventory
+  hosts: site03
   vars:
     position_default: 38
   gather_facts: no
