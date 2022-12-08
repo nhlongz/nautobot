@@ -17,12 +17,12 @@
     list_devices: []
   tasks:
 #------- set hostname---------#
-  - name: Set hostname
-    ios_hostname:
-      config: 
+
+  - name: Apply the provided configuration
+    cisco.ios.ios_hostname:
+      config:
         hostname: "{{ inventory_hostname }}"
       state: merged
-
 #------- ansible colected infomation hosts. ------#
   - name: "Check if net_version exists"
     ### If ansible_facts does not provide net_version we manually fill it in as unknown
