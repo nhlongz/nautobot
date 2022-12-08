@@ -19,7 +19,7 @@
 
 
 
-      - name: Create cable within Nautobot with only required information
+  - name: Create cable within Nautobot with only required information
     networktocode.nautobot.cable:
       url: "{{ url }}"
       token: "{{ token }}"
@@ -31,7 +31,7 @@
       termination_b:
         device: "site03-access1-{{ site_name }}" #"{{ item.0.host|split('.')[0] }}"   #{{ 'sarav@gritfy.com'|split('@')}}
         name: "{{ item.value.0.port }}"
-      status: active
+      status: connected
       state: present
     with_dict:   "{{ ansible_facts.net_neighbors }}"
     delegate_to: localhost

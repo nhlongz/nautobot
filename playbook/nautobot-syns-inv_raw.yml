@@ -242,15 +242,15 @@
       token: "{{ token }}"
       termination_a_type: "dcim.interface"
       termination_a:
-        device: "site03-core-site03"
-        name: "FastEthernet1/0"
+        device: "{{ Name_device }}"
+        name: "{{ item.key }}"
       termination_b_type: "dcim.interface"
       termination_b:
-        device: "site03-access1-site03" #"{{ item.0.host|split('.')[0] }}"   #{{ 'sarav@gritfy.com'|split('@')}}
-        name: "Ethernet0/0"
+        device: "site03-access1-{{ site_name }}" #"{{ item.0.host|split('.')[0] }}"   #{{ 'sarav@gritfy.com'|split('@')}}
+        name: "{{ item.value.0.port }}"
       status: connected
       state: present
-    run_once: true
+    with_dict:   "{{ ansible_facts.net_neighbors }}"
     delegate_to: localhost
 #    when: item.value.ipv4.0.address is defined and item.value.ipv4.0.address == ansible_host
 
