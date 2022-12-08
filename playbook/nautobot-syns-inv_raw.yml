@@ -198,41 +198,7 @@
       state: present
     delegate_to: localhost
 
-# add devices to the rack.
-       
-- name: PB to add devices to rack
-  hosts: site03
-  gather_facts: True
-  vars:
-    #ansible_user:
-    #ansible_ssh_private_key_file:
-    url: 'http://192.168.65.150:8088/'
-    token: 'cff1dc834c369b08dc02c0fa04e1e1e89dd7bb43'
-    platform: "{{ ansible_network_os }}"
-    site: "{{ site_name }}"
-    device_role: "{{ role_group }}"
-    list_devices: []
-    serial: 1
-  tasks:
-  - name: "Resolve FQDN Hostname - perform DIG"
-    raw: "dig -x {{ ansible_host }} +short | sed -e 's/.$//'"
-    register: dig_result
-    delegate_to: localhost
-
-  - name: "TASK 11: Assign dig result to fqdn var"
-    set_fact:
-      fqdn: "{{ dig_result.stdout_lines[0] | trim}}"
-    when: dig_result.stdout_lines[0] is defined
-
-  - name: "TASK 12: If no dig result, assign placeholder fqdn value"
-    set_fact:
-      fqdn: "{{ inventory_hostname }}-no-dns-{{ ansible_host }}"
-    when: dig_result.stdout_lines[0] is undefined
-
-  - name: "list devices"
-    set_fact:
-      list_devices: "{{ list_devices + [fqdn] }}"
-      delegate_facts: yes  
+# add devices to the rack. 
   - name: "Update the rack and position of an existing device" 
     ignore_errors: yes
     networktocode.nautobot.device:
@@ -244,8 +210,9 @@
       face: Front
       status: active
       state: present
-    run_one: True
-    loop: list_devices
+    register: put_status
+    until: put_status.rc | default('') == 0
+    loop: [38, 36, 34 ,32, 30,28,26]
     delegate_to: localhost
 
 
