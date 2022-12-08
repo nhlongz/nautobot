@@ -202,6 +202,7 @@
   - name: "list devices"
     set_fact:
       list_devices: "{{ list_devices + [fqdn] }}"
+      global: true
       cacheable: yes  
   - name: "Update the rack and position of an existing device" 
     ignore_errors: yes
@@ -214,7 +215,8 @@
       face: Front
       status: active
       state: present
-    loop: [38, 36, 34]
+    run_one: True
+    loop: list_devices
     delegate_to: localhost
         
 
