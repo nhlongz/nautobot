@@ -199,7 +199,8 @@
     delegate_to: localhost
 
 # add devices to the rack.
-  - set_fact: position_default = position_default - 2
+  - set_fact:
+      position_default: position_default - 2
     run_once: true
     cacheable: yes
   - name: Update the rack and position of an existing device
