@@ -211,6 +211,6 @@
       status: active
       state: present
   - set_fact: 
-      position_default = position_default - 2
-    cacheable: yes
+      position_default: "{{ position_default }} - 2"
+      cacheable: yes
     delegate_to: localhost
