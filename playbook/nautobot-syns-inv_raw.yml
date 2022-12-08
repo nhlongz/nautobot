@@ -14,7 +14,7 @@
     platform: "{{ ansible_network_os }}"
     site: "{{ site_name }}"
     device_role: "{{ role_group }}"
-    list_devices: ['']
+    list_devices: []
   tasks:
 #------- ansible colected infomation hosts. ------#
   - name: "Check if net_version exists"
