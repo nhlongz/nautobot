@@ -14,7 +14,7 @@
     platform: "{{ ansible_network_os }}"
     site: "{{ site_name }}"
     device_role: "{{ role_group }}"
-    list_devices: []
+    Name_device: ""
   tasks:
 #------- set hostname---------#
 
@@ -139,12 +139,16 @@
       state: present
     delegate_to: localhost
 
+  - set_fact:
+      Name_device: "{{ inventory_hostname }}-{{ site_name }}" 
+
 #####---- create devices ------######
   - name: Create device within Nautobot with only required information
     networktocode.nautobot.device:
       url: "{{ url }}"
       token: "{{ token }}"
-      name: "{{ fqdn }}"
+      name: "{{ Name_device }}"
+      asset_tag: "{{ fqdn }}"
       platform: "{{ platform }}"
       device_type: "{{ ansible_facts['net_model'] }}"
       device_role: "{{ device_role }}"
@@ -161,7 +165,7 @@
     networktocode.nautobot.device_interface:
       url: "{{ url }}"
       token: "{{ token }}"
-      device: "{{ fqdn }}"
+      device: "{{ Name_device }}"
       name: "{{ item.key }}" 
       mac_address: "{{ item.value.macaddress }}"
       mtu: "{{ item.value.mtu }}"
@@ -180,7 +184,7 @@
       status: active
       assigned_object:
         name: "{{ item.key }}" 
-        device: "{{ fqdn }}"
+        device: "{{ Name_device }}"
       state: present
       validate_certs: no
     when: item.value.ipv4.0.address is defined and item.value.ipv4.0.address == ansible_host
@@ -192,7 +196,7 @@
     networktocode.nautobot.device:
       url: "{{ url }}"
       token: "{{ token }}"
-      name: "{{ fqdn }}"
+      name: "{{ Name_device }}"
       platform: "{{ platform }}"
       device_type: "{{ ansible_facts['net_model'] }}"
       device_role: "{{ device_role }}"
@@ -212,7 +216,7 @@
     networktocode.nautobot.device:
       url: "{{ url }}"
       token: "{{ token }}"
-      name: "{{ fqdn }}"
+      name: "{{ Name_device }}"
       rack: "Rack_{{ site }}"
       position: "{{ item }}"
       face: Front
@@ -225,6 +229,7 @@
     until: put_status.changed == true
     delegate_to: localhost
 #    until: put_status.rc | default('') == 0 
+
 
 
       

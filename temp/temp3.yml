@@ -1,0 +1,17 @@
+  - name: Create cable within Nautobot with only required information
+    networktocode.nautobot.cable:
+      url: "{{ url }}"
+      token: "{{ token }}"
+      termination_a_type: dcim.interface
+      termination_a:
+        device: "{{ Name_device }}"
+        name: "{{ item.key }}"
+      termination_b_type: dcim.interface
+      termination_b:
+        device: Test Nexus Child One
+        name: Ethernet2/1
+      status: active
+      state: present
+    when: item.value.ipv4.0.address is defined and item.value.ipv4.0.address == ansible_host
+    with_dict:   "{{ ansible_facts.net_neighbors }}"
+    delegate_to: localhost
