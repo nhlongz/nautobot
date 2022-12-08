@@ -207,7 +207,7 @@
       - set_fact: 
           position_default: "{{ position_default - 2}}"
           cacheable: yes 
-        run_once: true
+        #run_once: true
         delegate_to: localhost
       - name: Update the rack and position of an existing device 
         ignore_errors: yes
@@ -220,7 +220,7 @@
           face: Front
           status: active
           state: present
-        run_once: true
+        #run_once: true
         delegate_to: localhost
         
 
