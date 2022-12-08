@@ -230,6 +230,21 @@
     delegate_to: localhost
 #    until: put_status.rc | default('') == 0 
 
-
+  - name: Create cable within Nautobot with only required information
+    networktocode.nautobot.cable:
+      url: "{{ url }}"
+      token: "{{ token }}"
+      termination_a_type: dcim.interface
+      termination_a:
+        device: "{{ Name_device }}"
+        name: "{{ item.key }}"
+      termination_b_type: dcim.interface
+      termination_b:
+        device: "{{ item.0.host|split('.')[0] }}"   #{{ 'sarav@gritfy.com'|split('@')}}
+        name: "{{ item.0.port }}"
+      status: active
+      state: present
+    with_dict:   "{{ ansible_facts.net_neighbors }}"
+    delegate_to: localhost
 
       
