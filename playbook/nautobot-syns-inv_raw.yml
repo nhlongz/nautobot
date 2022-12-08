@@ -14,7 +14,6 @@
     platform: "{{ ansible_network_os }}"
     site: "{{ site_name }}"
     device_role: "{{ role_group }}"
-    position_default: 38
   tasks:
 #------- ansible colected infomation hosts. ------#
   - name: "Check if net_version exists"
@@ -199,6 +198,10 @@
     delegate_to: localhost
 
 # add devices to the rack.
+  - set_fact:
+      position_default: 38
+    run_once: true
+    delegate_to: localhost
   - block:
       - set_fact: 
           position_default: "{{ position_default - 2}}"
