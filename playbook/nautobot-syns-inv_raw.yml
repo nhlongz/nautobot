@@ -250,8 +250,9 @@
         name: "{{ item.value.0.port }}"
       status: active
       state: present
-    loop:   "{{ ansible_facts.net_neighbors|dict2items }}"
+    with_dict:   "{{ ansible_facts.net_neighbors }}"
     delegate_to: localhost
 #    when: item.value.ipv4.0.address is defined and item.value.ipv4.0.address == ansible_host
 
-      
+#     with_dict:   "{{ ansible_facts.net_neighbors }}"
+# "{{ ansible_facts.net_neighbors|dict2items }}"      
