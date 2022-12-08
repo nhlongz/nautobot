@@ -250,6 +250,6 @@
         status: active
         state: present
     loop:   "{{ ansible_facts.net_neighbors }}"
-    delegate_to: localhost
+    #delegate_to: localhost
 
       
