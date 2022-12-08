@@ -200,7 +200,7 @@
 
 # add devices to the rack.
   - set_fact:
-      position_default: position_default - 2
+      position_default: "{{ position_default }} - 2"
       cacheable: yes
     run_once: true
     
