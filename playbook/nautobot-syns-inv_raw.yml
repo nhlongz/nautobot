@@ -213,7 +213,7 @@
       state: present
 #    register: put_status
     retries: 3
-    delay: 1
+    delay: 5
     loop: [38, 36, 34 ,32, 30,28,26]
 #    until: put_status.changed == true
     delegate_to: localhost
