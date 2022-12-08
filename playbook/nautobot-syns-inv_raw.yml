@@ -19,7 +19,7 @@
 #------- set hostname---------#
   - name: Set hostname
     hostname:
-     name: {{ inventory_hostname }}
+     name: "{{ inventory_hostname }}"
 #------- ansible colected infomation hosts. ------#
   - name: "Check if net_version exists"
     ### If ansible_facts does not provide net_version we manually fill it in as unknown
