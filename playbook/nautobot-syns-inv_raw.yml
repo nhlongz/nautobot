@@ -14,7 +14,6 @@
     platform: "{{ ansible_network_os }}"
     site: "{{ site_name }}"
     device_role: "{{ role_group }}"
-    position_default: [30, 32, 34, 36, 38]
   tasks:
 #------- ansible colected infomation hosts. ------#
   - name: "Check if net_version exists"
@@ -199,7 +198,15 @@
     delegate_to: localhost
 
 # add devices to the rack.
-
+  - name: "list devices"
+    set_fact:
+      list_devices: "{{ list_devices + [fqdn] }}"
+    cacheable: yes  
+    run_once: True
+  - name: debug message
+    ansible.builtin.debug:
+      msg: "lsit devices is {{ list_devices }}"
+      verbosity: 2
   - name: "Update the rack and position of an existing device" 
     ignore_errors: yes
     networktocode.nautobot.device:
