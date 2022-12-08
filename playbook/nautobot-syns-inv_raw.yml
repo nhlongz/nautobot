@@ -234,7 +234,7 @@
   - block:
     - set_fact:
         abc: "abc.com"
-        temp: "{{ abc|split('.') }}"
+        temp: "{{ abc|map(split,'.') }}"
         Conected_device: "{{ temp[0] }}"
     - name: Create cable within Nautobot with only required information
       networktocode.nautobot.cable:
