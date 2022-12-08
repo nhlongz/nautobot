@@ -222,21 +222,6 @@
     until: put_status.changed == true
     delegate_to: localhost
 #    until: put_status.rc | default('') == 0 
-  - name: Create cable within NetBox with only required information
-    netbox_cable:
-      netbox_url: http://netbox.local
-      netbox_token: thisIsMyToken
-      data:
-        termination_a_type: dcim.interface
-        termination_a:
-          device: Test Nexus Child One
-          name: Ethernet2/2
-        termination_b_type: dcim.interface
-        termination_b:
-          device: Test Nexus Child One
-          name: Ethernet2/1
-      when: item.value.ipv4.0.address is defined and item.value.ipv4.0.address == ansible_host
-      with_dict:   "{{ ansible_facts.net_interfaces }}"
-      state: present
+
 
       
