@@ -18,7 +18,7 @@
   tasks:
 #------- set hostname---------#
 
-  - name: Apply the provided configuration
+  - name: set hostname
     cisco.ios.ios_hostname:
       config:
         hostname: "{{ inventory_hostname }}"
