@@ -207,6 +207,7 @@
       rack: "Rack_{{ site }}"
       position: "{{ item }}"
       face: Front
+      status: active
       state: present
     loop: [38,36,34,32,30,28,26,24,22,20]
     register: put_status
