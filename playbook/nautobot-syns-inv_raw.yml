@@ -240,6 +240,7 @@
 #        temp: "{{ item.value.0.host|map(split,'.') }}"
 #        Conected_device: "{{ temp[0] }}-{{ site_name }}"
   - name: Create cable within Nautobot with only required information
+    ignore_errors: yes
     networktocode.nautobot.cable:
       url: "{{ url }}"
       token: "{{ token }}"
