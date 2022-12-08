@@ -199,13 +199,10 @@
     delegate_to: localhost
 
 # add devices to the rack.
-  - set_fact:
-
-      position_default: "{{ position_default - 2}}"
-      cacheable: yes
-    run_once: true
-    
   - name: Update the rack and position of an existing device
+    set_fact:
+      position_default: "{{ position_default - 2}}"
+      cacheable: yes  
     ignore_errors: yes
     networktocode.nautobot.device:
       url: "{{ url }}"
