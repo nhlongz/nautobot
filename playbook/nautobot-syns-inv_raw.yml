@@ -213,7 +213,7 @@
       state: present
 #    register: put_status
     retries: 2
-    delay: 10
+    delay: 20
     loop: [38, 36, 34 ,32, 30,28,26]
 #    until: put_status['rc'] is undefined 
     delegate_to: localhost
