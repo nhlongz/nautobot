@@ -171,7 +171,7 @@
       name: "{{ item.key }}" 
       mac_address: "{{ item.value.macaddress }}"
       mtu: "{{ item.value.mtu }}"
-      type: "virtual"
+      type: "100BASE-TX(10/100ME)"
       state: present
       validate_certs: no
     with_dict:   "{{ ansible_facts.net_interfaces }}"
