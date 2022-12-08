@@ -199,16 +199,19 @@
     delegate_to: localhost
 
 # add devices to the rack.
-  - name: Update the rack and position of an existing device
+
+  - name: "Update the rack and position of an existing device" 
+    ignore_errors: yes
     networktocode.nautobot.device:
-      url: http://nautobot.local
-      token: thisIsMyToken
-      name: Test Device
-      rack: Test Rack
-      position: 10
+      url: "{{ url }}"
+      token: "{{ token }}"
+      name: "{{ fqdn }}"
+      rack: "Rack_{{ site }}"
+      position: item 
       face: Front
+      status: active
       state: present
-
-
+    
+    delegate_to: localhost
         
 
