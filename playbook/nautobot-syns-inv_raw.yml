@@ -203,7 +203,7 @@
     set_fact:
       list_devices: "{{ list_devices + [fqdn] }}"
       global: true
-      cacheable: yes  
+      #cacheable: yes  
   - name: "Update the rack and position of an existing device" 
     ignore_errors: yes
     networktocode.nautobot.device:
