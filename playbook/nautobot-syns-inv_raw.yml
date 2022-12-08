@@ -211,7 +211,7 @@
           face: Front
           status: active
           state: present
-        with_list: position_default
+        with_item: position_default
         delegate_to: localhost
         
 
