@@ -248,7 +248,7 @@
       termination_b:
         device: "site03-access1-site03" #"{{ item.0.host|split('.')[0] }}"   #{{ 'sarav@gritfy.com'|split('@')}}
         name: "Ethernet0/0"
-      status: active
+      status: connected
       state: present
     run_once: true
     delegate_to: localhost
