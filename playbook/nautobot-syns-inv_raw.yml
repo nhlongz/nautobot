@@ -200,7 +200,7 @@
 
 # add devices to the rack.
   - name: Update the rack and position of an existing device
-    set_fact:
+  - set_fact:
       position_default: "{{ position_default - 2}}"
       cacheable: yes  
     ignore_errors: yes
