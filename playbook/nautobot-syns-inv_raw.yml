@@ -16,6 +16,10 @@
     device_role: "{{ role_group }}"
     list_devices: []
   tasks:
+#------- set hostname---------#
+  - name: Set hostname
+    hostname:
+     name: {{ inventory_hostname }}
 #------- ansible colected infomation hosts. ------#
   - name: "Check if net_version exists"
     ### If ansible_facts does not provide net_version we manually fill it in as unknown
@@ -217,8 +221,22 @@
     loop: [38, 36, 34 ,32, 30,28,26]
     until: put_status.changed == true
     delegate_to: localhost
-
 #    until: put_status.rc | default('') == 0 
-
+  - name: Create cable within NetBox with only required information
+    netbox_cable:
+      netbox_url: http://netbox.local
+      netbox_token: thisIsMyToken
+      data:
+        termination_a_type: dcim.interface
+        termination_a:
+          device: Test Nexus Child One
+          name: Ethernet2/2
+        termination_b_type: dcim.interface
+        termination_b:
+          device: Test Nexus Child One
+          name: Ethernet2/1
+      when: item.value.ipv4.0.address is defined and item.value.ipv4.0.address == ansible_host
+      with_dict:   "{{ ansible_facts.net_interfaces }}"
+      state: present
 
       
