@@ -14,6 +14,7 @@
     platform: "{{ ansible_network_os }}"
     site: "{{ site_name }}"
     device_role: "{{ role_group }}"
+    position_default: [30, 32, 34, 36, 38]
   tasks:
 #------- ansible colected infomation hosts. ------#
   - name: "Check if net_version exists"
@@ -198,17 +199,7 @@
     delegate_to: localhost
 
 # add devices to the rack.
-  - set_fact:
-      position_default: 38
-      cacheable: yes 
-    run_once: true
-    delegate_to: localhost
   - block:
-      - set_fact: 
-          position_default: "{{ position_default - 2}}"
-          cacheable: yes 
-        #run_once: true
-        delegate_to: localhost
       - name: Update the rack and position of an existing device 
         ignore_errors: yes
         networktocode.nautobot.device:
@@ -216,11 +207,11 @@
           token: "{{ token }}"
           name: "{{ fqdn }}"
           rack: "Rack_{{ site }}"
-          position: "{{ position_default }}"
+          position: "{{ item }}"
           face: Front
           status: active
           state: present
-        #run_once: true
+        loop: position_default
         delegate_to: localhost
         
 
