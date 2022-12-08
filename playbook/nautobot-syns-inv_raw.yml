@@ -3,7 +3,17 @@
 # Also perform a dig to get a FQDN which we can use as device name instead of the inventory_name
 
 ---
-- name: PB to Bootstrap Netbox Inventory
+- name: 
+  hosts: site03
+  gather_facts: false
+  tasks:
+#------- set hostname---------#
+  - name: set hostname
+    cisco.ios.ios_hostname:
+      config:
+        hostname: "{{ inventory_hostname }}"
+      state: merged
+- name: PB to Bootstrap Nautobot Inventory
   hosts: site03
   gather_facts: True
   vars:
@@ -18,13 +28,6 @@
     Conected_device: ""
     temp: ""
   tasks:
-#------- set hostname---------#
-
-  - name: set hostname
-    cisco.ios.ios_hostname:
-      config:
-        hostname: "{{ inventory_hostname }}"
-      state: merged
 #------- ansible colected infomation hosts. ------#
   - name: "Check if net_version exists"
     ### If ansible_facts does not provide net_version we manually fill it in as unknown
@@ -142,7 +145,7 @@
     delegate_to: localhost
 
   - set_fact:
-      Name_device: "{{ inventory_hostname }}-{{ site_name }}" 
+      Name_device: "{{ inventory_hostname }}.{{ site_name }}.vn" 
 
 #####---- create devices ------######
   - name: Create device within Nautobot with only required information
@@ -246,7 +249,7 @@
         name: "{{ item.key }}"
       termination_b_type: "dcim.interface"
       termination_b:
-        device: "{{ item.value.0['host']|str - 'site03.vn' }}-{{ site_name }}"  #{{ 'sarav@gritfy.com'|split('@')}}
+        device: "{{ item.value.0['host'] - 'site03.vn' }}-{{ site_name }}"  #{{ 'sarav@gritfy.com'|split('@')}}
         name: "{{ item.value.0.port }}"
       status: connected
       state: present
