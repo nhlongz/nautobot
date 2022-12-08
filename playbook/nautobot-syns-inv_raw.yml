@@ -3,7 +3,7 @@
 # Also perform a dig to get a FQDN which we can use as device name instead of the inventory_name
 
 ---
-- name: Playbook to Bootstrap Nautobot Inventory
+- name: PB to Bootstrap Netbox Inventory
   hosts: site03
   gather_facts: True
   vars:
@@ -14,7 +14,7 @@
     platform: "{{ ansible_network_os }}"
     site: "{{ site_name }}"
     device_role: "{{ role_group }}"
-
+    position_default: 38
   tasks:
 #------- ansible colected infomation hosts. ------#
   - name: "Check if net_version exists"
@@ -199,31 +199,23 @@
     delegate_to: localhost
 
 # add devices to the rack.
-- name: Add devices to the rack.
-  hosts: site03
-  vars:
-    position_default: 38
-    url: 'http://192.168.65.150:8088/'
-    token: 'cff1dc834c369b08dc02c0fa04e1e1e89dd7bb43'
-  gather_facts: no
-  serial: 1
-  tasks:
-    - block:
-        - set_fact:
-            position_default: "{{ position_default - 2}}"
-          run_once: true
-          delegate_to: localhost
-          delegate_facts: yes
-        - name: Update the rack and position of an existing device 
-          ignore_errors: yes
-          networktocode.nautobot.device:
-            url: "{{ url }}"
-            token: "{{ token }}"
-            name: "{{ fqdn }}"
-            rack: "Rack_{{ site }}"
-            position: "{{ position_default }}"
-            face: Front
-            status: active
-            state: present
-          run_once: true
-          delegate_to: localhost
+  - block:
+      - set_fact:
+          position_default: "{{ position_default - 2}}"
+          cacheable: yes 
+          run_one: true
+        delegate_to: localhost
+      - name: Update the rack and position of an existing device 
+        ignore_errors: yes
+        networktocode.nautobot.device:
+          url: "{{ url }}"
+          token: "{{ token }}"
+          name: "{{ fqdn }}"
+          rack: "Rack_{{ site }}"
+          position: "{{ position_default }}"
+          face: Front
+          status: active
+          state: present
+          run_one: true
+        delegate_to: localhost
+
