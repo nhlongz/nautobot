@@ -3,6 +3,13 @@ all:
   children:
     site01:
       children:
+        site01_core:
+          hosts:
+            site01-core1: 
+            site01-core2: 
+          vars:
+            role_group: switch_core
+            role_color: "CB4335"
         site01_access:
           hosts:
             site01-access1:         
@@ -11,13 +18,7 @@ all:
           vars:
             role_group: switch_access
             role_color: "27AE60"
-        site01_core:
-          hosts:
-            site01-core1: 
-            site01-core2: 
-          vars:
-            role_group: switch_core
-            role_color: "CB4335"
+
 
 
 
