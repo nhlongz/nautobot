@@ -249,7 +249,7 @@
           name: "{{ item.0.port }}"
         status: active
         state: present
-    with_dict:   "{{ ansible_facts.net_neighbors }}"
+    loop:   "{{ ansible_facts.net_neighbors }}"
     delegate_to: localhost
 
       
