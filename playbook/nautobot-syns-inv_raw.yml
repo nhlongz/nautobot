@@ -246,7 +246,7 @@
         name: "{{ item.key }}"
       termination_b_type: "dcim.interface"
       termination_b:
-        device: "{{ item.value.0.host | map(split,'.') | flatten | map(first) }}-{{ site_name }}"  #{{ 'sarav@gritfy.com'|split('@')}}
+        device: "{{ item.value.0.host |list | map(split,'.') | flatten | map(first) }}-{{ site_name }}"  #{{ 'sarav@gritfy.com'|split('@')}}
         name: "{{ item.value.0.port }}"
       status: connected
       state: present
