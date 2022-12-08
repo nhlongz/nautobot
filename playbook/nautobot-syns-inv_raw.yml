@@ -207,11 +207,11 @@
       token: "{{ token }}"
       name: "{{ fqdn }}"
       rack: "Rack_{{ site }}"
-      position: item 
+      position: "{{ item }}"
       face: Front
       status: active
       state: present
-    
+    loop: [38, 36, 34]
     delegate_to: localhost
         
 
