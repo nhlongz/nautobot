@@ -17,4 +17,10 @@ all:
           vars:
             role_group: switch_access
             role_color: "27AE60"
+        site03_routers:
+          hosts:
+            site03-router:        
+          vars:
+            role_group: routers
+            role_color: "40AE60"
 
