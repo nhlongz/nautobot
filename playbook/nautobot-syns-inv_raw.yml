@@ -201,6 +201,8 @@
 # add devices to the rack.
   - name: Update the rack and position of an existing device
     ignore_errors: yes
+  - set_fact: position_default = position_default - 2
+    run_once: true
     networktocode.nautobot.device:
       url: "{{ url }}"
       token: "{{ token }}"
@@ -210,6 +212,5 @@
       face: Front
       status: active
       state: present
-  - set_fact: position_default = position_default - 2
-    run_once: true
+
     delegate_to: localhost
