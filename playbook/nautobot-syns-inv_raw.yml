@@ -210,8 +210,6 @@
       face: Front
       status: active
       state: present
-  - set_fact: 
-      position_default: "{{ position_default }} - 2"
-      register_global: position_default
-      cacheable: yes
+  - set_fact: position_default = position_default - 2
+    run_once: true
     delegate_to: localhost
