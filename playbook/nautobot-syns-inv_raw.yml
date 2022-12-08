@@ -4,7 +4,7 @@
 
 ---
 - name: PB to Bootstrap Netbox Inventory
-  hosts: site01
+  hosts: site03
   gather_facts: True
   vars:
     #ansible_user:
