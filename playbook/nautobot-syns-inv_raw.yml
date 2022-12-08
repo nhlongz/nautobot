@@ -3,7 +3,7 @@
 # Also perform a dig to get a FQDN which we can use as device name instead of the inventory_name
 
 ---
-- name: PB to Bootstrap Netbox Inventory
+- name: Playbook to Bootstrap Nautobot Inventory
   hosts: site03
   gather_facts: True
   vars:
@@ -199,7 +199,7 @@
     delegate_to: localhost
 
 # add devices to the rack.
-- name: PB to Bootstrap Netbox Inventory
+- name: Add devices to the rack.
   hosts: site03
   vars:
     position_default: 38
