@@ -200,6 +200,7 @@
 # add devices to the rack.
   - set_fact:
       position_default: 38
+      cacheable: yes 
     run_once: true
     delegate_to: localhost
   - block:
