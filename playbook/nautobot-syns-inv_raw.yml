@@ -200,9 +200,9 @@
 
 # add devices to the rack.
   - block:
-      - set_fact:
-          position_default: "{{ position_default - 2}}"
-          cacheable: yes 
+      - set_fact: position_default = position_default -2
+          #position_default: "{{ position_default - 2}}"
+          #cacheable: yes 
         run_one: true
         delegate_to: localhost
       - name: Update the rack and position of an existing device 
