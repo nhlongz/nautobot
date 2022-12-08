@@ -210,6 +210,6 @@
       face: Front
       status: active
       state: present
-    set_fact: 
+  - set_fact: 
       position_default = position_default - 2
     delegate_to: localhost
