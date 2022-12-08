@@ -240,11 +240,11 @@
     networktocode.nautobot.cable:
       url: "{{ url }}"
       token: "{{ token }}"
-      termination_a_type: dcim.interface
+      termination_a_type: "dcim.interface"
       termination_a:
         device: "{{ Name_device }}"
         name: "{{ item.key }}"
-      termination_b_type: dcim.interface
+      termination_b_type: "dcim.interface"
       termination_b:
         device: "{{ item.value.0.host | map(split,'.') | first }}-{{ site_name }}" #"{{ item.0.host|split('.')[0] }}"   #{{ 'sarav@gritfy.com'|split('@')}}
         name: "{{ item.value.0.port }}"
