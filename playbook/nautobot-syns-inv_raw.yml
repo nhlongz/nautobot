@@ -16,6 +16,7 @@
     device_role: "{{ role_group }}"
     Name_device: ""
     Conected_device: ""
+    temp: ""
   tasks:
 #------- set hostname---------#
 
@@ -233,9 +234,8 @@
 
   - block:
     - set_fact:
-        abc: "abc.com"
-        temp: "{{ abc|map(split,'.') }}"
-        Conected_device: "{{ temp[0] }}"
+        temp: "{{ item.value.0.host|map(split,'.') }}"
+        Conected_device: "{{ temp[0] }}-{{ site_name }}"
     - name: Create cable within Nautobot with only required information
       networktocode.nautobot.cable:
         url: "{{ url }}"
@@ -247,10 +247,11 @@
         termination_b_type: dcim.interface
         termination_b:
           device: "{{ Conected_device }}" #"{{ item.0.host|split('.')[0] }}"   #{{ 'sarav@gritfy.com'|split('@')}}
-          name: "{{ item.0.port }}"
+          name: "{{ item.value.0.port }}"
         status: active
         state: present
-    #loop:   "{{ ansible_facts.net_neighbors }}"
-    #delegate_to: localhost
+    loop:   "{{ ansible_facts.net_neighbors|dict2items }}"
+    delegate_to: localhost
+#    when: item.value.ipv4.0.address is defined and item.value.ipv4.0.address == ansible_host
 
       
