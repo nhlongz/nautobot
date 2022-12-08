@@ -209,7 +209,7 @@
       face: Front
       status: active
       state: present
-#    loop: [38,36,34,32]
+#    loop: [32, 34, 36, 38]
 #    register: put_status
 #    until: put_status.rc | default('') == 0 or put_status.rc == 1
     delegate_to: localhost
