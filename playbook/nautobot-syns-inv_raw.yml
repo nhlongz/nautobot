@@ -201,7 +201,7 @@
   - name: "list devices"
     set_fact:
       list_devices: "{{ list_devices + [fqdn] }}"
-    cacheable: yes  
+      cacheable: yes  
     run_once: True
   - name: debug message
     ansible.builtin.debug:
