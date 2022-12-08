@@ -21,7 +21,8 @@
     ios_hostname:
       config: 
         hostname: "{{ inventory_hostname }}"
-    state: merged
+      state: merged
+
 #------- ansible colected infomation hosts. ------#
   - name: "Check if net_version exists"
     ### If ansible_facts does not provide net_version we manually fill it in as unknown
