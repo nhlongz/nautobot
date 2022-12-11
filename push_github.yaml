@@ -7,13 +7,9 @@
     - name: git push
       shell: |
         cd {{ root_path }}/backups_config
-        git config --global user.name nhlongz
+        git config --global user.name {{ github_name }}
         git config --global url.'https://api:{{ github_vault }}@github.com/'.insteadOf 'https://github.com/'
         git add .
         git commit -a -m "test"
         git push
       register: output 
-
-#        git add . 
-#        "git push nhlongz:{{github_vault}}@github.com"
-#        git config --list
