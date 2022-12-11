@@ -51,6 +51,8 @@
         dest: "/{{ root_path }}"
         clone: yes
         update: yes
+        single_branch: yes
+        version: main
       run_once: true
       delegate_to: localhost
 
@@ -60,6 +62,8 @@
         dest: "/{{ root_path }}/config_change_info"
         clone: yes
         update: yes
+        single_branch: yes
+        version: config_change_info
       run_once: true
       delegate_to: localhost
 
