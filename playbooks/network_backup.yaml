@@ -51,18 +51,17 @@
         dest: "/{{ root_path }}/backups_config"
         clone: yes
         update: yes
-        single_branch: yes
+        force: true
         version: main
       run_once: true
       delegate_to: localhost
-
     - name: Clone and update github repo backup_config with branc config_change_info in /root_path/config_change_info
       ansible.builtin.git:
         repo: "{{ repo_url }}"
         dest: "/{{ root_path }}/config_change_info"
         clone: yes
         update: yes
-        single_branch: yes
+        force: true
         version: config_change_info
       run_once: true
       delegate_to: localhost
