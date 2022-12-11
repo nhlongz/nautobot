@@ -1,6 +1,6 @@
 ---
 - name: restore router configurations
-  hosts: all
+  hosts: 
   gather_facts: false
 
   tasks:
