@@ -1,6 +1,6 @@
 ---
 - name: Backup network configurations
-  hosts: site03
+  hosts: localhost
   gather_facts: false
   vars:
     root_path: /var/lib/ol-automation-manager/github
