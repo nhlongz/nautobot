@@ -3,6 +3,7 @@
   gather_facts: false
   vars:
     root_path: /var/lib/ol-automation-manager/github
+    github_name: github_user
   tasks:
     - name: git push
       shell: |
