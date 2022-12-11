@@ -1,0 +1,71 @@
+---
+- name: retrieve network configurations
+  hosts: site03
+  gather_facts: false
+  vars:
+    root_path: /var/lib/ol-automation-manager
+    inventory_restore: "test"
+    project_restore: "git_pb_public"
+    playbook_restore: "playbooks/network_restore.yml"
+  tasks:
+
+
+    - name: Get backup configuration
+      include_role:
+        name: "../roles/backup"
+      when: ansible_network_os is defined
+
+    - block:
+        - name: Get date time
+          command: date +'%Y-%m-%d@%H:%M'
+          register: timestamp
+          environment:
+            TZ: Asia/Ho_Chi_Minh
+          run_once: true
+          delegate_to: localhost        
+        - name: Create time stamp for play
+          set_fact:
+            datetime: "{{ timestamp.stdout }}"
+          delegate_to: localhost
+          delegate_facts: true
+          run_once: true
+
+    - name: Created backup folder
+      file:
+        path: "{{ root_path }}/backup"
+        state: directory
+      run_once: true
+      delegate_to: localhost
+
+    - name: Save config to backup folder
+      copy:
+        src: "{{ config_output.backup_path }}"
+        dest: "{{ root_path }}/backup/{{hostvars['localhost'].datetime}}/"
+      when: config_output is defined                            
+      delegate_to: localhost
+
+    - name: Find backups
+      find:
+        paths: "{{ root_path }}/backup"
+        file_type: directory
+      register: backups
+      run_once: true                                            
+      delegate_to: localhost
+      delegate_facts: true
+
+    - name: Create restore job template 
+      awx.awx.job_template:
+        name: "Network - Restore"
+        organization: "Default"
+        job_type: "run"
+        inventory: "{{ inventory_restore }}"
+        project: "{{ project_restore }}"
+        playbook: "{{ playbook_restore }}"
+        credentials: 
+          - "cisco_pw"
+        state: "present"
+        controller_config_file: "~/tower_cli.cfg"
+        survey_enabled: yes
+        survey_spec: "{{ lookup('template', '{{ playbook_dir }}/../network_setup/templates/backup.j2') }}"
+      run_once: true
+      delegate_to: localhost
