@@ -51,30 +51,27 @@
       when: config_output is defined                            
       delegate_to: localhost
 
-    - name: HTTPS | update backups_config to github.
-      git_acp:
-        user: nhlongz
-        token: github_vault   #"{{ token_github }}"
-        path: "{{ root_path }}/backups_config"
-        branch: main
-        comment: "update backup on {{ hostvars['localhost'].datetime }}"
-#        remote: origin
-        add: [ "." ]
-        mode: https
-        url: "https://github.com/nhlongz/backups_config.git"
+    - name: git update backups_config to github
+      shell: |
+        cd {{ root_path }}/backups_config
+        git config --global user.name {{ github_name }}
+        git config --global url.'https://api:{{ github_vault }}@github.com/'.insteadOf 'https://github.com/'
+        git add .
+        git commit -a -m "update backup on {{ hostvars['localhost'].datetime }}"
+        git push
+      register: output
       run_once: true
       delegate_to: localhost 
-    - name: HTTPS | update config_change_info to github.
-      git_acp:
-        user: nhlongz
-        token: github_vault   #"{{ token_github }}"
-        path: "{{ root_path }}/config_change_info/backups_config"
-        branch: config_change_info
-        comment: "update backup on {{ hostvars['localhost'].datetime }}"
-#        remote: origin
-        add: [ "." ]
-        mode: https
-        url: "https://github.com/nhlongz/backups_config.git"
+
+    - name: git push config_change_info to github
+      shell: |
+        cd {{ root_path }}//config_change_info/backups_config
+        git config --global user.name {{ github_name }}
+        git config --global url.'https://api:{{ github_vault }}@github.com/'.insteadOf 'https://github.com/'
+        git add .
+        git commit -a -m "update backup on {{ hostvars['localhost'].datetime }}"
+        git push
+      register: output
       run_once: true
       delegate_to: localhost
 
