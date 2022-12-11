@@ -57,7 +57,7 @@
         token: "{{ token_github }}"
         path: "{{ root_path }}/backups_config"
         branch: main
-        comment: "update backup on {{ datetime }}"
+        comment: "update backup on {{ hostvars['localhost'].datetime }}"
         remote: origin
         add: [ "." ]
         mode: https
@@ -70,7 +70,7 @@
         token: "{{ token_github }}"
         path: "{{ root_path }}/config_change_info/backups_config"
         branch: config_change_info
-        comment: "update backup on {{ datetime }}"
+        comment: "update backup on {{ hostvars['localhost'].datetime }}"
         remote: origin
         add: [ "." ]
         mode: https
