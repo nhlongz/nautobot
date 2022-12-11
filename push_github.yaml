@@ -8,6 +8,4 @@
       shell: |
         cd /var/lib/ol-automation-manager/github/backups_config
         git add . 
-        git push
-        nhlongz
-        "{{github_vault}}"
+        "git push nhlongz:{{github_vault}}@github.com"
