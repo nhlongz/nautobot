@@ -11,7 +11,7 @@
         path: "{{ root_path }}/backups_config"
         branch: main
         comment: "update backup on test"
-#        remote: origin
+        remote: origin
         add: [ "." ]
         mode: https
         url: "https://github.com/nhlongz/backups_config.git"
@@ -24,7 +24,7 @@
         path: "{{ root_path }}/config_change_info/backups_config"
         branch: config_change_info
         comment: "update backup on test"
-#        remote: origin
+        remote: origin
         add: [ "." ]
         mode: https
         url: "https://github.com/nhlongz/backups_config.git"
