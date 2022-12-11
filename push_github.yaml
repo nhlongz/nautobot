@@ -6,5 +6,6 @@
   tasks:
     - name: git push
       shell: |
+        cd /var/lib/ol-automation-manager/github/backups_config
         git add . 
         git push
