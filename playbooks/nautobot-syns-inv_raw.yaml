@@ -3,7 +3,7 @@
 # Also perform a dig to get a FQDN which we can use as device name instead of the inventory_name
 
 ---
-- name: 
+- name: set hostname
   hosts: site03
   gather_facts: false
   tasks:
@@ -13,7 +13,7 @@
       config:
         hostname: "{{ inventory_hostname }}"
       state: merged
-- name: PB to Bootstrap Nautobot Inventory
+- name: Playbook to Bootstrap Nautobot Inventory
   hosts: site03
   gather_facts: True
   vars:
@@ -72,7 +72,7 @@
 #-------- ansible create and update infomation from ansible_colected to nautobot------#
 # create manufacturer, device_type, site, device_role, platporm, region,rack.
   - name: Create manufacturer within Nautobot with only required information
-    ignore_errors: yes
+    ignore_errors: true
     networktocode.nautobot.manufacturer:
       url: "{{ url }}"
       token: "{{ token }}"
@@ -80,7 +80,7 @@
       state: present
     delegate_to: localhost
   - name: Create device_type within Nautobot with only required information
-    ignore_errors: yes
+    ignore_errors: true
     networktocode.nautobot.device_type:
       url: "{{ url }}"
       token: "{{ token }}"
@@ -90,7 +90,7 @@
       state: present
     delegate_to: localhost
   - name: Create region_zone within Nautobot with only required information
-    ignore_errors: yes
+    ignore_errors: true
     networktocode.nautobot.region:
       url: "{{ url }}"
       token: "{{ token }}"
@@ -98,7 +98,7 @@
       state: present
     delegate_to: localhost
   - name: Create region within Nautobot with only required information
-    ignore_errors: yes
+    ignore_errors: true
     networktocode.nautobot.region:
       url: "{{ url }}"
       token: "{{ token }}"
@@ -107,7 +107,7 @@
       state: present
     delegate_to: localhost
   - name: Create site within Nautobot with only required information
-    ignore_errors: yes
+    ignore_errors: true
     networktocode.nautobot.site:
       url: "{{ url }}"
       token: "{{ token }}"
@@ -117,7 +117,7 @@
       state: present
     delegate_to: localhost
   - name: Create device role within Nautobot with only required information
-    ignore_errors: yes
+    ignore_errors: true
     networktocode.nautobot.device_role:
       url: "{{ url }}"
       token: "{{ token }}"
@@ -126,7 +126,7 @@
       state: present
     delegate_to: localhost
   - name: Create platform within Nautobot with only required information
-    ignore_errors: yes
+    ignore_errors: true
     networktocode.nautobot.platform:
       url: "{{ url }}"
       token: "{{ token }}"
@@ -134,7 +134,7 @@
       state: present
     delegate_to: localhost
   - name: Create rack within Nautobot with only required information
-    ignore_errors: yes
+    ignore_errors: true
     networktocode.nautobot.rack:
       url: "{{ url }}"
       token: "{{ token }}"
@@ -217,7 +217,7 @@
 # add devices to the rack. 
 
   - name: "Update the rack and position of an existing device" 
-    ignore_errors: yes
+    ignore_errors: true
     networktocode.nautobot.device:
       url: "{{ url }}"
       token: "{{ token }}"
@@ -240,7 +240,7 @@
 #        temp: "{{ item.value.0.host|map(split,'.') }}"
 #        Conected_device: "{{ temp[0] }}-{{ site_name }}"
   - name: Create cable within Nautobot with only required information
-    ignore_errors: yes
+    ignore_errors: true
     networktocode.nautobot.cable:
       url: "{{ url }}"
       token: "{{ token }}"
