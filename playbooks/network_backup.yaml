@@ -6,7 +6,7 @@
     root_path: /var/lib/ol-automation-manager
     inventory_restore: "test"
     project_restore: "nautobot_github@test_inventory"
-    playbook_restore: "playbooks/network_restore.yml"
+    playbook_restore: "playbooks/network_restore.yaml"
     token_github: github_vault
   tasks:
 
