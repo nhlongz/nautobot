@@ -95,8 +95,7 @@
         inventory: "{{ inventory_restore }}"
         project: "{{ project_restore }}"
         playbook: "{{ playbook_restore }}"
-        credentials: 
-          - "cisco_pw"
+        credential: "cisco_pw"
         state: "present"
         controller_config_file: "~/tower_cli.cfg"
         survey_enabled: yes
