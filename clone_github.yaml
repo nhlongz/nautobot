@@ -27,6 +27,7 @@
         dest: "/{{ root_path }}/backups_config"
         clone: yes
         update: yes
+        force: true
         version: main
       run_once: true
       delegate_to: localhost
@@ -36,6 +37,7 @@
         dest: "/{{ root_path }}/config_change_info"
         clone: yes
         update: yes
+        force: true
         version: config_change_info
       run_once: true
       delegate_to: localhost
