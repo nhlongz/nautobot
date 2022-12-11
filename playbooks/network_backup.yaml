@@ -88,6 +88,7 @@
         git add .
         git commit -a -m "update backup on {{ hostvars['localhost'].datetime }}"
         git push
+        rm ~/.gitconfig
       register: output
       run_once: true
       delegate_to: localhost 
@@ -100,6 +101,7 @@
         git add .
         git commit -a -m "update backup on {{ hostvars['localhost'].datetime }}"
         git push
+        rm ~/.gitconfig
       register: output
       run_once: true
       delegate_to: localhost
