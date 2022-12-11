@@ -10,7 +10,7 @@
         src: "{{ root_path }}/backups_config/{{rollback_date}}/{{inventory_hostname}}.txt"
         dest: "/tmp/{{rollback_date}}/"
         flat: true
-      delegate_to: backup-server
+      delegate_to: localhost
       when: ansible_network_os is defined
 
     - name: load restore role
