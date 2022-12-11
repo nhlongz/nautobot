@@ -33,7 +33,7 @@
 
     - name: Created backup folder
       file:
-        path: "{{ root_path }}/github/"
+        path: "{{ root_path }}"
         state: directory
       run_once: true
       delegate_to: localhost
