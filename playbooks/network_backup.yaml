@@ -48,7 +48,7 @@
     - name: Clone and update github repo backup_config with branc main in /root_path.
       ansible.builtin.git:
         repo: "{{ repo_url }}"
-        dest: "/{{ root_path }}"
+        dest: "/{{ root_path }}/backups_config"
         clone: yes
         update: yes
         single_branch: yes
