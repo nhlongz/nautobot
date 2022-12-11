@@ -1,0 +1,31 @@
+- name: retrieve network configurations
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+    - name: HTTPS | update backups_config to github.
+      git_acp:
+        user: nhlongz
+        token: github_vault   #"{{ token_github }}"
+        path: "{{ root_path }}/backups_config"
+        branch: main
+        comment: "update backup on test"
+#        remote: origin
+        add: [ "." ]
+        mode: https
+        url: "https://github.com/nhlongz/backups_config.git"
+      run_once: true
+      delegate_to: localhost 
+    - name: HTTPS | update config_change_info to github.
+      git_acp:
+        user: nhlongz
+        token: github_vault   #"{{ token_github }}"
+        path: "{{ root_path }}/config_change_info/backups_config"
+        branch: config_change_info
+        comment: "update backup on test"
+#        remote: origin
+        add: [ "." ]
+        mode: https
+        url: "https://github.com/nhlongz/backups_config.git"
+      run_once: true
+      delegate_to: localhost
