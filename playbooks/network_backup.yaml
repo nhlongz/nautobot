@@ -1,5 +1,5 @@
 ---
-- name: retrieve network configurations
+- name: Backup network configurations
   hosts: site03
   gather_facts: false
   vars:
@@ -12,7 +12,7 @@
   tasks:
 
 
-    - name: Get backup configuration
+    - name: Create backup configuration --> temp file
       include_role:
         name: "../roles/backup"
       when: ansible_network_os is defined
@@ -32,9 +32,9 @@
           delegate_facts: true
           run_once: true
 
-    - name: Created backup folder
+    - name: Created backup path.
       file:
-        path: "{{ root_path }}"
+        path: "{{ root_path }}/backups_config"
         state: directory
       run_once: true
       delegate_to: localhost
@@ -80,7 +80,7 @@
       when: config_output is defined                            
       delegate_to: localhost
 
-    - name: git update backups_config to github
+    - name: Push backups_config to github
       shell: |
         cd {{ root_path }}/backups_config
         git config --global user.name {{ github_name }}
@@ -92,7 +92,7 @@
       run_once: true
       delegate_to: localhost 
 
-    - name: git push config_change_info to github
+    - name: Push config_change_info to github
       shell: |
         cd {{ root_path }}//config_change_info/backups_config
         git config --global user.name {{ github_name }}
