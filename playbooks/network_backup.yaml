@@ -3,7 +3,7 @@
   hosts: site03
   gather_facts: false
   vars:
-    root_path: /var/lib/ol-automation-manager
+    root_path: /var/lib/ol-automation-manager/github
     inventory_restore: "test"
     project_restore: "nautobot_github@test_inventory"
     playbook_restore: "playbooks/network_restore.yaml"
@@ -41,13 +41,13 @@
     - name: Save config to backup folder
       copy:
         src: "{{ config_output.backup_path }}"
-        dest: "{{ root_path }}/github/backups_config/{{hostvars['localhost'].datetime}}/"
+        dest: "{{ root_path }}/backups_config/{{hostvars['localhost'].datetime}}/"
       when: config_output is defined                            
       delegate_to: localhost
     - name: Save config to backup_infor folder
       copy:
         src: "{{ config_output.backup_path }}"
-        dest: "{{ root_path }}/github/config_change_info/backups_config/{{site_name}}/"
+        dest: "{{ root_path }}/config_change_info/backups_config/{{site_name}}/"
       when: config_output is defined                            
       delegate_to: localhost
 
@@ -80,7 +80,7 @@
 
     - name: Find backups
       find:
-        paths: "{{ root_path }}/backup"
+        paths: "{{ root_path }}/backups_config"
         file_type: directory
       register: backups
       run_once: true                                            
@@ -95,7 +95,8 @@
         inventory: "{{ inventory_restore }}"
         project: "{{ project_restore }}"
         playbook: "{{ playbook_restore }}"
-        credential: "cisco_pw"
+        credential: 
+          - "cisco_pw"
         state: "present"
         controller_config_file: "~/tower_cli.cfg"
         survey_enabled: yes
