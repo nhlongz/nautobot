@@ -4,7 +4,31 @@
   gather_facts: false
   vars:
     root_path: /var/lib/ol-automation-manager/github
+    token_github: github_vault
+    repo_url: https://github.com/nhlongz/backups_config.git
+    github_name: github_user
   tasks:
+    - name: Clone and update github repo backup_config with branc main in /root_path.
+      ansible.builtin.git:
+        repo: "{{ repo_url }}"
+        dest: "/{{ root_path }}/backups_config"
+        clone: yes
+        update: yes
+        force: true
+        version: main
+      run_once: true
+      delegate_to: localhost
+    - name: Clone and update github repo backup_config with branc config_change_info in /root_path/config_change_info
+      ansible.builtin.git:
+        repo: "{{ repo_url }}"
+        dest: "/{{ root_path }}/config_change_info"
+        clone: yes
+        update: yes
+        force: true
+        version: config_change_info
+      run_once: true
+      delegate_to: localhost
+
     - name: retreive configuration from backup-server to execution environment
       ansible.builtin.fetch:
         src: "{{ root_path }}/backups_config/{{rollback_date}}/{{inventory_hostname}}.cfg"
