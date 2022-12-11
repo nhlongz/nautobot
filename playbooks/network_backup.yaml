@@ -123,7 +123,7 @@
         inventory: "{{ inventory_restore }}"
         project: "{{ project_restore }}"
         playbook: "{{ playbook_restore }}"
-        credential: 
+        credentials: 
           - "cisco_pw"
         state: "present"
         controller_config_file: "~/tower_cli.cfg"

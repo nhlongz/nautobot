@@ -1,0 +1,35 @@
+---
+- name: Backup network configurations
+  hosts: site03
+  gather_facts: false
+  vars:
+    root_path: /var/lib/ol-automation-manager/github
+    inventory_restore: "test"
+    project_restore: "nautobot_github@test_inventory"
+    playbook_restore: "playbooks/network_restore.yaml"
+  tasks:
+    - name: Find backups
+      find:
+        paths: "{{ root_path }}/backups_config"
+        file_type: directory
+      register: backups
+      run_once: true                                            
+      delegate_to: localhost
+      delegate_facts: true
+
+    - name: Create restore job template 
+      awx.awx.job_template:
+        name: "Network - Restore"
+        organization: "Default"
+        job_type: "run"
+        inventory: "{{ inventory_restore }}"
+        project: "{{ project_restore }}"
+        playbook: "{{ playbook_restore }}"
+        credentials: 
+          - "cisco_pw"
+        state: "present"
+        controller_config_file: "~/tower_cli.cfg"
+        survey_enabled: yes
+        survey_spec: "{{ lookup('template', '{{ playbook_dir }}/../network_setup/templates/backup.j2') }}"
+      run_once: true
+      delegate_to: localhost
