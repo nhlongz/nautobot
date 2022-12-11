@@ -9,7 +9,7 @@
         user: nhlongz
         token: github_vault   #"{{ token_github }}"
         path: "{{ root_path }}/backups_config"
-        branch: main
+        branch: master
         comment: "update backup on test"
 #        remote: origin
         add: [ "." ]
