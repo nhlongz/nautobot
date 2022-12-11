@@ -8,6 +8,7 @@
       shell: |
         cd /var/lib/ol-automation-manager/github/backups_config
         git config --list
+        git config --global url."https://api:${{ github_vault }}@github.com/".insteadOf "https://github.com/"
       register: output 
 
 #        git add . 
