@@ -20,7 +20,7 @@
 
     - block:
         - name: Get date time
-          command: date +'%Y-%m-%d@%H:%M'
+          command: date +'%Y-%m-%d@%H-%M'
           register: timestamp
           environment:
             TZ: Asia/Ho_Chi_Minh
