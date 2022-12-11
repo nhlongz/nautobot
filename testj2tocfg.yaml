@@ -1,0 +1,25 @@
+---
+- name: testj2tocfg
+  hosts: site03-access1
+  gather_facts: false
+  vars:
+    root_path: /var/lib/ol-automation-manager/
+
+  tasks:
+  - name: Created backup path.
+    file:
+      path: "{{ root_path }}/test"
+      state: directory
+    run_once: true
+    delegate_to: localhost
+  - name: 
+    cisco.ios.ios_config:
+      backup: yes
+      src: ios_temp.j2
+  - name: 
+    cisco.ios.ios_config:
+      src: ios_temp.j2
+      backup: yes
+      backup_options:
+        filename: backup.cfg
+        dir_path: "{{ root_path }}/test"

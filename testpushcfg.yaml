@@ -1,0 +1,9 @@
+---
+- hosts: site03-access1
+  gather_facts: false
+  vars:
+      root_path: /var/lib/ol-automation-manager/
+  tasks:
+  - name: push config file
+    ios_config:
+    src: "{{ root_path }}/test/backup.cfg"
