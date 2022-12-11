@@ -25,9 +25,8 @@
       ansible.builtin.git:
         repo: "{{ repo_url }}"
         dest: "/{{ root_path }}/backups_config"
-#        clone: yes
-#        update: yes
-        single_branch: yes
+        clone: yes
+        update: yes
         version: main
       run_once: true
       delegate_to: localhost
@@ -35,9 +34,8 @@
       ansible.builtin.git:
         repo: "{{ repo_url }}"
         dest: "/{{ root_path }}/config_change_info"
-#        clone: yes
-#        update: yes
-        single_branch: yes
+        clone: yes
+        update: yes
         version: config_change_info
       run_once: true
       delegate_to: localhost
