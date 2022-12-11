@@ -1,7 +1,8 @@
 - name: retrieve network configurations
   hosts: localhost
   gather_facts: false
-
+  vars:
+    root_path: /var/lib/ol-automation-manager/github
   tasks:
     - name: HTTPS | update backups_config to github.
       git_acp:
