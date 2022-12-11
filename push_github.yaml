@@ -1,5 +1,7 @@
 - name: retrieve network configurations
   hosts: localhost
+  become: true
+  become_user: awx
   gather_facts: false
   vars:
     root_path: /var/lib/ol-automation-manager/github
