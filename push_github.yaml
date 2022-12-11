@@ -10,4 +10,4 @@
         git add . 
         git push
         nhlongz
-        "{{github_token}}"
+        "{{github_vault}}"
