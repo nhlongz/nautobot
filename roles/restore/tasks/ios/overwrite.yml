@@ -1,6 +1,6 @@
 ---
 - name: copy file over to flash on network device
-  ansible.builtin.command: "scp -o StrictHostKeyChecking=no /tmp/{{ rollback_date }}/{{ inventory_hostname }}.cfg {{ ansible_user }}@{{ inventory_hostname }}:flash:{{ rollback_date }}-{{ inventory_hostname }}.cfg"
+  ansible.builtin.command: "scp -o StrictHostKeyChecking=no /tmp/{{ rollback_date }}/{{ inventory_hostname }}.cfg {{ ansible_user }}@{{ ansible_host }}:flash:{{ rollback_date }}-{{ inventory_hostname }}.cfg"
   delegate_to: localhost
 
 - name: overwrite startup config
