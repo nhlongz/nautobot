@@ -6,5 +6,5 @@
   tasks:
   - name: push config file
     ios_config:
-      src: "/var/lib/ol-automation-manager/backups_config/2022-12-12@05-07/site03-access1.config"
+      src: "/var/lib/ol-automation-manager/backups_config/2022-12-12@05-07/site03-access1.cfg"
     
