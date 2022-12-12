@@ -31,7 +31,7 @@
 
     - name: retreive configuration from backup-server to execution environment
       ansible.builtin.fetch:
-        src: "{{ root_path }}/backups_config/{{rollback_date}}/{{inventory_hostname}}.cfg"
+        src: "{{ root_path }}/backups_config/{{rollback_date}}/{{inventory_hostname}}.txt"
         dest: "/tmp/{{rollback_date}}/"
         flat: true
       delegate_to: localhost

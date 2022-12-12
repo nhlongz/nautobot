@@ -4,7 +4,7 @@
     backup: true
     backup_options:
       dir_path: /tmp/
-      filename: "{{ inventory_hostname }}.cfg"
+      filename: "{{ inventory_hostname }}.txt"
   register: config_output
 
 # This task removes the Current configuration... from the top of IOS routers show run
