@@ -1,7 +1,3 @@
-### Playbook to bootstrap netbox inventory with a list of juniper devices provided by static inventory file
-# Uses ansible gather_facts to grab net_version, serial number and net_model
-# Also perform a dig to get a FQDN which we can use as device name instead of the inventory_name
-
 ---
 - name: set hostname
   hosts: site03
