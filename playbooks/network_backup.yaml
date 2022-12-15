@@ -4,7 +4,7 @@
   gather_facts: false
   vars:
     root_path: /var/lib/ol-automation-manager/github
-    inventory_restore: "test"
+    inventory_restore: "inventory"
     project_restore: "nautobot_github@test_inventory"
     playbook_restore: "playbooks/network_restore.yaml"
     token_github: github_vault
