@@ -189,7 +189,7 @@
       type: "Virtual" 
       state: present
       validate_certs: no
-    when: "{{item.key}} == 'Vlan1'"
+    when: "{{item.key}} == Vlan1"
     with_dict:   "{{ ansible_facts.net_interfaces }}"
     delegate_to: localhost
   - name: "Add IP address of ansible host to IPAM"
