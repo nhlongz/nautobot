@@ -173,12 +173,25 @@
       name: "{{ item.key }}" 
       mac_address: "{{ item.value.macaddress }}"
       mtu: "{{ item.value.mtu }}"
-      type: "{{ 'Virtual' if {{ item.key }} == 'Vlan1' else '100BASE-TX (10/100ME)' }}" #"100BASE-TX (10/100ME)" 
+      type: "100BASE-TX (10/100ME)" 
       state: present
       validate_certs: no
     with_dict:   "{{ ansible_facts.net_interfaces }}"
     delegate_to: localhost
-
+  - name: fix type interface vlan
+    networktocode.nautobot.device_interface:
+      url: "{{ url }}"
+      token: "{{ token }}"
+      device: "{{ Name_device }}"
+      name: "{{ item.key }}" 
+      mac_address: "{{ item.value.macaddress }}"
+      mtu: "{{ item.value.mtu }}"
+      type: "Virtual" 
+      state: present
+      validate_certs: no
+    when: "{{item.key}} == 'Vlan1'"
+    with_dict:   "{{ ansible_facts.net_interfaces }}"
+    delegate_to: localhost
   - name: "Add IP address of ansible host to IPAM"
 #networktocode.nautobot.ip_address:
     networktocode.nautobot.ip_address:
