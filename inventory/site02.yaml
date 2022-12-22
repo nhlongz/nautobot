@@ -6,9 +6,7 @@ all:
           hosts:
             site02-access1:    
               vars:
-                ansible_host: 10.0.2.3
-                ansible_connection: network_cli
-                ansible_network_os: ios
+
                 manu: cisco
                 position_rack: 3      
             site02-access2: 
