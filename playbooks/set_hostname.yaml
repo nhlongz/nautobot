@@ -4,7 +4,7 @@
   tasks:
 #------- set hostname---------#
   - name: set hostname
-    cisco.ios.ios_hostname:
+    ios_hostname:
       config:
         hostname: "{{ inventory_hostname }}"
       state: merged
