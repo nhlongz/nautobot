@@ -1,0 +1,17 @@
+  - name: "Update the rack and position of an existing device" 
+    ignore_errors: true
+    networktocode.nautobot.device:
+      url: "{{ url }}"
+      token: "{{ token }}"
+      name: "{{ Name_device }}"
+      rack: "Rack_{{ site }}"
+      position: "{{ item }}"
+      face: Front
+      status: active
+      state: present
+    register: put_status
+    retries: 1
+    delay: 5
+    loop: [38, 36, 34 ,32, 30,28,26]
+    until: put_status.changed == true
+    delegate_to: localhost
