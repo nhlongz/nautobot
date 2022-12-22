@@ -256,11 +256,11 @@
       token: "{{ token }}"
       termination_a_type: dcim.interface
       termination_a:
-        device: site02_router
+        device: site02-router.site02.vn
         name: FastEthernet0/0
       termination_b_type: dcim.interface
       termination_b:
-        device: site03_router
+        device: site03-router.site03.vn
         name: FastEthernet0/0
       state: absent
     run_once: true
@@ -271,11 +271,11 @@
       token: "{{ token }}"
       termination_a_type: dcim.interface
       termination_a:
-        device: site03_router
+        device: site03-router.site03.vn
         name: FastEthernet0/0
       termination_b_type: dcim.interface
       termination_b:
-        device: site02_router
+        device: site02-router.site02.vn
         name: FastEthernet0/0
       state: absent
     run_once: true
