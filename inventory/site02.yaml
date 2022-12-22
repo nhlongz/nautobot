@@ -5,21 +5,21 @@ all:
         site02_access:
           hosts:
             site02-access1:    
-              vars:
+              #vars:
                 ansible_host: 10.0.2.3
                 ansible_connection: network_cli
                 ansible_network_os: ios
                 manu: cisco
                 position_rack: 3      
             site02-access2: 
-              vars:
+              #vars:
                 ansible_host: 10.0.2.4
                 ansible_connection: network_cli
                 ansible_network_os: ios
                 manu: cisco  
                 position_rack: 4
             site02-access3:
-              vars:
+              #vars:
                 ansible_host: 10.0.2.5
                 ansible_connection: network_cli
                 ansible_network_os: ios
@@ -30,14 +30,14 @@ all:
         site02_core:
           hosts:
             site02-core1: 
-              vars:
+              #vars:
                 ansible_host: 10.0.2.1
                 ansible_connection: network_cli
                 ansible_network_os: ios
                 manu: cisco  
                 position_rack: 1
             site02-core2: 
-              vars:
+              #vars:
                 ansible_host: 10.0.2.2
                 ansible_connection: network_cli
                 ansible_network_os: ios
