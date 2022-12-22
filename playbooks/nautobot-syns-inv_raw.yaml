@@ -131,6 +131,7 @@
       site: "{{ site }}"
       status: active
       state: present
+    run_once: true
     delegate_to: localhost
 
   - set_fact:
