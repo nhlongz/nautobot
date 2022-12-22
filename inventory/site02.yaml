@@ -9,21 +9,22 @@ all:
               ansible_connection: network_cli
               ansible_network_os: ios
               manu: cisco
-              position_rack: 3      
+              position_rack: 4      
             site02-access2: 
               ansible_host: 10.0.2.4
               ansible_connection: network_cli
               ansible_network_os: ios
               manu: cisco  
-              position_rack: 4
+              position_rack: 5
             site02-access3:
               ansible_host: 10.0.2.5
               ansible_connection: network_cli
               ansible_network_os: ios
               manu: cisco 
-              position_rack: 5  
+              position_rack: 6  
           vars:
             role_group: switch_access
+            role_color: "27AE60"
         site02_core:
           hosts:
             site02-core1: 
@@ -31,13 +32,26 @@ all:
               ansible_connection: network_cli
               ansible_network_os: ios
               manu: cisco  
-              position_rack: 1
+              position_rack: 2
             site02-core2: 
               ansible_host: 10.0.2.2
               ansible_connection: network_cli
               ansible_network_os: ios
               manu: cisco  
-              position_rack: 2
+              position_rack: 3
           vars:
             role_group: switch_core
+            role_color: "CB4335"
+        site02_router:
+          hosts:
+            site02-core1: 
+              ansible_host: 192.168.65.209
+              ansible_connection: network_cli
+              ansible_network_os: ios
+              manu: cisco  
+              position_rack: 1
+          vars:
+            role_group: routers
+            role_color: "40AE60"
+          
   
