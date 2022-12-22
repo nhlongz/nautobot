@@ -250,6 +250,20 @@
       state: present
     with_dict:   "{{ ansible_facts.net_neighbors }}"
     delegate_to: localhost
+  - name: Delete cable within nautobot
+    networktocode.nautobot.cable:
+      url: "{{ url }}"
+      token: "{{ token }}"
+      termination_a_type: dcim.interface
+      termination_a:
+        device: site02_router
+        name: FastEthernet0/0
+      termination_b_type: dcim.interface
+      termination_b:
+        device: site03_router
+        name: FastEthernet0/0
+      state: absent
+    delegate_to: localhost
 #    when: item.value.ipv4.0.address is defined and item.value.ipv4.0.address == ansible_host
 #item.value.0.host | split('.') |list |first
 #     with_dict:   "{{ ansible_facts.net_neighbors }}"
