@@ -52,6 +52,6 @@ all:
               position_rack: 1
           vars:
             role_group: routers
-            role_color: "40AE60"
+            role_color: "334CFF"
           
   
