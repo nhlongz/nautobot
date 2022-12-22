@@ -251,6 +251,7 @@
     with_dict:   "{{ ansible_facts.net_neighbors }}"
     delegate_to: localhost
   - name: Delete cable within nautobot
+    ignore_errors: true
     networktocode.nautobot.cable:
       url: "{{ url }}"
       token: "{{ token }}"
@@ -266,6 +267,7 @@
     run_once: true
     delegate_to: localhost
   - name: Delete cable within nautobot
+    ignore_errors: true
     networktocode.nautobot.cable:
       url: "{{ url }}"
       token: "{{ token }}"
