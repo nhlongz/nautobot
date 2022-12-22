@@ -123,6 +123,7 @@
       state: present
     delegate_to: localhost
   - name: Create rack group within Nautobot with only required information
+    ignore_errors: true
     networktocode.nautobot.rack_group:
       url: "{{ url }}"
       token: "{{ token }}"
