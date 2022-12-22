@@ -222,7 +222,7 @@
       token: "{{ token }}"
       name: "{{ Name_device }}"
       rack: "Rack_{{ site }}"
-      position: "{{ position_default|int - 2*position_rack|int }}"
+      position: "{{ position_default|int - (position_rack|int)*2  }}"
       face: Front
       status: active
       state: present
