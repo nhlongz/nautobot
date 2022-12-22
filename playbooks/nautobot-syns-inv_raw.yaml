@@ -1,25 +1,14 @@
 ---
-- name: set hostname
-  hosts: site03
-  gather_facts: false
-  tasks:
-#------- set hostname---------#
-  - name: set hostname
-    cisco.ios.ios_hostname:
-      config:
-        hostname: "{{ inventory_hostname }}"
-      state: merged
 - name: Playbook to Bootstrap Nautobot Inventory
-  hosts: site03
+  hosts: all
   gather_facts: True
   vars:
-    #ansible_user:
-    #ansible_ssh_private_key_file:
-    url: 'http://192.168.65.150:8088/'
-    token: 'cff1dc834c369b08dc02c0fa04e1e1e89dd7bb43'
+    url: "{{ url_nautobot }}"
+    token: "{{ token_nautobot }}"
     platform: "{{ ansible_network_os }}"
     site: "{{ site_name }}"
     device_role: "{{ role_group }}"
+    position_default: 38
     Name_device: ""
     Conected_device: ""
     temp: ""
@@ -85,12 +74,12 @@
       manufacturer: "{{ manu }}"
       state: present
     delegate_to: localhost
-  - name: Create region_zone within Nautobot with only required information
+  - name: Create parent_region within Nautobot with only required information
     ignore_errors: true
     networktocode.nautobot.region:
       url: "{{ url }}"
       token: "{{ token }}"
-      name: "{{ site_zone }}"
+      name: "{{ parent_region }}"
       state: present
     delegate_to: localhost
   - name: Create region within Nautobot with only required information
@@ -99,7 +88,7 @@
       url: "{{ url }}"
       token: "{{ token }}"
       name: "{{ site_Region }}"
-      parent_region: "{{ site_zone }}"
+      parent_region: "{{ parent_region }}"
       state: present
     delegate_to: localhost
   - name: Create site within Nautobot with only required information
@@ -109,6 +98,10 @@
       token: "{{ token }}"
       name: "{{ site }}"
       region: "{{ site_Region }}"
+      physical_address: "{{ site_Address }}"
+      time_zone: "{{ time_zone }}"
+      contact_name: "{{ contact_name }}"
+      contact_phone: "{{ contact_phone }}"
       status: active
       state: present
     delegate_to: localhost
@@ -129,6 +122,15 @@
       name: "{{ platform }}"
       state: present
     delegate_to: localhost
+  - name: Create rack group within Nautobot with only required information
+    ignore_errors: true
+    networktocode.nautobot.rack_group:
+      url: "{{ url }}"
+      token: "{{ token }}"
+      name: "rack_group_{{ site }}"
+      site: "{{ site }}"
+      state: present
+    delegate_to: localhost
   - name: Create rack within Nautobot with only required information
     ignore_errors: true
     networktocode.nautobot.rack:
@@ -136,6 +138,7 @@
       token: "{{ token }}"
       name: "Rack_{{ site }}"
       site: "{{ site }}"
+      rack_group: "rack_group_{{ site }}"
       status: active
       state: present
     delegate_to: localhost
@@ -175,7 +178,7 @@
       validate_certs: no
     with_dict:   "{{ ansible_facts.net_interfaces }}"
     delegate_to: localhost
-
+    
   - name: "Add IP address of ansible host to IPAM"
 #networktocode.nautobot.ip_address:
     networktocode.nautobot.ip_address:
@@ -219,15 +222,10 @@
       token: "{{ token }}"
       name: "{{ Name_device }}"
       rack: "Rack_{{ site }}"
-      position: "{{ item }}"
+      position: "{{ position_default|int - (position_rack|int)*2  }}"
       face: Front
       status: active
       state: present
-    register: put_status
-    retries: 1
-    delay: 5
-    loop: [38, 36, 34 ,32, 30,28,26]
-    until: put_status.changed == true
     delegate_to: localhost
 #    until: put_status.rc | default('') == 0 
 
@@ -251,6 +249,38 @@
       status: connected
       state: present
     with_dict:   "{{ ansible_facts.net_neighbors }}"
+    delegate_to: localhost
+  - name: Delete cable within nautobot
+    ignore_errors: true
+    networktocode.nautobot.cable:
+      url: "{{ url }}"
+      token: "{{ token }}"
+      termination_a_type: dcim.interface
+      termination_a:
+        device: site02-router.site02.vn
+        name: FastEthernet0/0
+      termination_b_type: dcim.interface
+      termination_b:
+        device: site03-router.site03.vn
+        name: FastEthernet0/0
+      state: absent
+    run_once: true
+    delegate_to: localhost
+  - name: Delete cable within nautobot
+    ignore_errors: true
+    networktocode.nautobot.cable:
+      url: "{{ url }}"
+      token: "{{ token }}"
+      termination_a_type: dcim.interface
+      termination_a:
+        device: site03-router.site03.vn
+        name: FastEthernet0/0
+      termination_b_type: dcim.interface
+      termination_b:
+        device: site02-router.site02.vn
+        name: FastEthernet0/0
+      state: absent
+    run_once: true
     delegate_to: localhost
 #    when: item.value.ipv4.0.address is defined and item.value.ipv4.0.address == ansible_host
 #item.value.0.host | split('.') |list |first

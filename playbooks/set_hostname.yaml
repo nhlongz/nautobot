@@ -1,0 +1,10 @@
+- name: set hostname
+  hosts: all
+  gather_facts: false
+  tasks:
+#------- set hostname---------#
+  - name: set hostname
+    cisco.ios.ios_hostname:
+      config:
+        hostname: "{{ inventory_hostname }}"
+      state: merged

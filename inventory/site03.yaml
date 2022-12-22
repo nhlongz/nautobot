@@ -3,14 +3,14 @@ all:
   children:
     site03:
       children:
-        site03_core:                          #group core
+        site03_core:                          
           hosts:
             site03-core:
           vars:
             role_group: switch_core
             role_color: "CB4335"
 
-        site03_access:                        #group access
+        site03_access:                        
           hosts:
             site03-access1:        
             site03-access2:
@@ -22,5 +22,5 @@ all:
             site03-router:        
           vars:
             role_group: routers
-            role_color: "40AE60"
+            role_color: "334CFF"
 

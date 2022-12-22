@@ -1,3 +1,8 @@
 site_name: site02
-site_Region: "48 P. O Đong Lam, Phuong Lien, Dong Da, Ha Noi"
-site_zone: "Ha_Noi"
+site_Address: "48 P. O Đong Lam, Phuong Lien, Dong Da, Ha Noi"
+site_Region: "Q. Dong Da"
+parent_region: "Ha_Noi"
+time_zone: "Asia/Ho_Chi_Minh"
+contact_name: "Nguyen Van Luc"
+contact_phone: "0985123478"
+contact_email: "nvluc@gmail.com"

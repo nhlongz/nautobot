@@ -1,3 +1,8 @@
 site_name: site03
-site_Region: "366 D. Phan Van Tri, Phuong 5, Go Vap, Tp Ho Chi Minh"
-site_zone: "Ho_Chi_Minh"
+site_Address: "366 D. Phan Van Tri, Phuong 5, Go Vap, Tp Ho Chi Minh"
+site_Region: "Q. Go Vap"
+parent_region: "Ho_Chi_Minh"
+time_zone: "Asia/Ho_Chi_Minh"
+contact_name: "Nguyen Van An"
+contact_phone: "0985876543"
+contact_email: "nvan@gmail.com"
