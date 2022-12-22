@@ -44,7 +44,7 @@ all:
             role_color: "CB4335"
         site02_router:
           hosts:
-            site02-core1: 
+            site02-router: 
               ansible_host: 192.168.65.209
               ansible_connection: network_cli
               ansible_network_os: ios
