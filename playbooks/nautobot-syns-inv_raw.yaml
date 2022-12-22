@@ -122,6 +122,14 @@
       name: "{{ platform }}"
       state: present
     delegate_to: localhost
+  - name: Create rack group within Nautobot with only required information
+    networktocode.nautobot.rack_group:
+      url: "{{ url }}"
+      token: "{{ token }}"
+      name: "rack_group_{{ site }}"
+      site: "{{ site }}"
+      state: present
+    delegate_to: localhost
   - name: Create rack within Nautobot with only required information
     ignore_errors: true
     networktocode.nautobot.rack:
@@ -129,9 +137,9 @@
       token: "{{ token }}"
       name: "Rack_{{ site }}"
       site: "{{ site }}"
+      rack_group: "rack_group_{{ site }}"
       status: active
       state: present
-    delay: 5
     delegate_to: localhost
 
   - set_fact:
