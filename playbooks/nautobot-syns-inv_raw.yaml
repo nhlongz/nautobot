@@ -1,6 +1,6 @@
 ---
 - name: Playbook to Bootstrap Nautobot Inventory
-  hosts: site03
+  hosts: all
   gather_facts: True
   vars:
     url: "{{ url_nautobot }}"
@@ -8,6 +8,7 @@
     platform: "{{ ansible_network_os }}"
     site: "{{ site_name }}"
     device_role: "{{ role_group }}"
+    position_default: 38
     Name_device: ""
     Conected_device: ""
     temp: ""
@@ -211,12 +212,10 @@
       token: "{{ token }}"
       name: "{{ Name_device }}"
       rack: "Rack_{{ site }}"
-      position: "{{ item }}"
+      position: position_default - position_rack*2
       face: Front
       status: active
       state: present
-    retries: 1
-    delay: 5
     delegate_to: localhost
 #    until: put_status.rc | default('') == 0 
 
