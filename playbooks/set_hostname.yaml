@@ -1,5 +1,5 @@
 - name: set hostname
-  hosts: site03
+  hosts: all
   gather_facts: false
   tasks:
 #------- set hostname---------#
